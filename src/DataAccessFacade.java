@@ -49,6 +49,8 @@ public class DataAccessFacade implements DataAccess{
         return bookMap.get(bookId);
     }
 
-
-
+    @Override
+    public Book findBookByISBN(String isbn) {
+        return bookMap.get(isbn);
+    }
 }
