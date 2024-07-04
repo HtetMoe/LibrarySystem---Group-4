@@ -7,7 +7,7 @@ public class Person {
     private Address address;
     private Role role;
 
-    public Person(String id, String firstName, String lastName, String phone, Address address, Role role) {
+    public Person(String id, String firstName, String lastName, String phone, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +35,6 @@ public class Person {
         DataAccess dataAccess = DataAccessFacade.getInstance();
         Person person = dataAccess.findPersonById(id);
 
-//        if(person = null){}
         if (person != null && person.getPassword().equals(password)) {
             return person;
         }
