@@ -8,5 +8,7 @@ public class CheckOutEntry {
     private String datePaid;
     private double fineAmount;
 
-    
+    public boolean isOverdue(){
+        return true;
+    }
 }
