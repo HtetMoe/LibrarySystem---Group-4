@@ -7,6 +7,8 @@ public class Book implements Serializable {
     private List<Author> authors;
     private List<BookCopy> copies;
 
+
+
     //check out entry
     public void checkout(){
 

@@ -44,10 +44,6 @@ public class DataAccessFacade implements DataAccess{
         return personMap.get(id);
     }
 
-    @Override
-    public Book findBookById(String bookId) {
-        return bookMap.get(bookId);
-    }
 
     @Override
     public Book findBookByISBN(String isbn) {
