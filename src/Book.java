@@ -16,4 +16,13 @@ public class Book implements Serializable {
     public boolean isAvailable(){
         return true;
     }
+
+    public List<BookCopy> getCopies() {
+        return copies;
+    }
+
+    //add copy
+    public void addCopy(BookCopy copy){
+        copies.add(copy);
+    }
 }
