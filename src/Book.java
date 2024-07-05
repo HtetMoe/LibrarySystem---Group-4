@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book implements Serializable {
@@ -8,12 +9,26 @@ public class Book implements Serializable {
     private List<BookCopy> copies;
     private int borrowedDuration;
 
-    public Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int maxLengthForRent) {
+    private Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int borrowedDuration) {
         this.title = title;
         this.ISBN = ISBN;
         this.authors = authors;
         this.copies = copies;
-        this.borrowedDuration = maxLengthForRent;
+        this.borrowedDuration = borrowedDuration;
+    }
+
+    public static Book createBookWithAuthor(String ISBN,String title,
+                                     String id, String firstName,String lastName, String phone,
+                                     String street,String city,String state, String zip,String credential,String bio,
+                                     int copies, int borrowDuration){
+        List<Author> authorList = new ArrayList<>();
+        authorList.add(Person.createAuthor(id,firstName,lastName,phone,street,city,state,zip,credential,bio));
+        List<BookCopy> bookCopies = new ArrayList<>();
+        for (int i = 1; i<=copies;i++){
+            BookCopy bookCopy = new BookCopy(i,true);
+            bookCopies.add(bookCopy);
+        }
+        return new Book(title,ISBN,authorList,bookCopies,borrowDuration);
     }
 
     //check out entry
