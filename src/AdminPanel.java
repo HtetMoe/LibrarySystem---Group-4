@@ -47,6 +47,12 @@ public class AdminPanel extends JPanel {
             }
         });
 
+        editMemberButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showAskForMemberIdPanel();
+            }
+        });
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addBookButton);
         buttonPanel.add(addMemberButton);
