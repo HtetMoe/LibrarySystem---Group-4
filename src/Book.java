@@ -16,6 +16,8 @@ public class Book implements Serializable {
         this.borrowedDuration = maxLengthForRent;
     }
 
+    public Book(String title, String ISBN) {}
+
     //check out entry
     public void checkout() {
 
@@ -53,5 +55,17 @@ public class Book implements Serializable {
             if (bookCopy.isOverdue()) return true;
         }
         return false;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return authors.get(0).toString();
+    }
+
+    public String getIsbn() {
+        return ISBN;
     }
 }
