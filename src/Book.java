@@ -7,7 +7,8 @@ public class Book implements Serializable {
     private List<Author> authors;
     private List<BookCopy> copies;
     private int maxLengthForRent;
-    public Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies,int maxLengthForRent) {
+
+    public Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int maxLengthForRent) {
         this.title = title;
         this.ISBN = ISBN;
         this.authors = authors;
@@ -15,38 +16,40 @@ public class Book implements Serializable {
         this.maxLengthForRent = maxLengthForRent;
     }
 
-
-
     //check out entry
-    public void checkout(){
+    public void checkout() {
 
     }
 
     //check availability
-    public boolean isAvailable(){
+    public boolean isAvailable() {
         return true;
     }
 
     public List<BookCopy> getCopies() {
         return copies;
     }
-    public BookCopy getAvailableBookCopy(){
-        for (BookCopy bookCopy : copies){
+
+    public BookCopy getAvailableBookCopy() {
+        for (BookCopy bookCopy : copies) {
             if (bookCopy.isAvailable()) return bookCopy;
         }
         return null;
     }
 
     //add copy
-    public void addCopy(BookCopy copy){
+    public void addCopy(BookCopy copy) {
         copies.add(copy);
+
+        //save
     }
 
     public int getMaxLengthForRent() {
         return maxLengthForRent;
     }
-    public boolean isOverDue(){
-        for (BookCopy bookCopy: copies){
+
+    public boolean isOverDue() {
+        for (BookCopy bookCopy : copies) {
             if (bookCopy.isOverdue()) return true;
         }
         return false;

@@ -1,14 +1,12 @@
+import java.time.LocalDate;
 import java.util.List;
 
 public class Member extends Role {
-    //checkoutentry
     private CheckOutEntry checkOutEntry;
-
-
 
     //check book is available
     public boolean checkAvailability(String ISBN) {
-        Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
+        Book book = getBook(ISBN);
 
         if (book != null) {
             List<BookCopy> copies = book.getCopies();
@@ -23,19 +21,32 @@ public class Member extends Role {
 
     //checkout book
     public void checkoutBook(String ISBN) {
+        Book book = getBook(ISBN);
+        checkoutBook(book);
     }
-    public void checkoutBook(Book book){
-        int getMaxLength = book.getMaxLengthForRent();
+
+    public void checkoutBook(Book book) {
+        int duration = book.getMaxLengthForRent();
         BookCopy bookCopy = book.getAvailableBookCopy();
-        if (bookCopy == null){
+
+        if (bookCopy == null) {
+            System.out.println("No book available.");
             return;
         }
-        CheckOutEntry checkOutEntry = new CheckOutEntry(bookCopy,this,"today","book.getMaxLength+today");
+
+        CheckOutEntry checkOutEntry = new CheckOutEntry(bookCopy, this, LocalDate.now(), LocalDate.now().plusDays(duration));
         this.checkOutEntry = checkOutEntry;
         bookCopy.setCheckOutEntry(checkOutEntry);
         bookCopy.setAvailable(false);
+
+        //save
         DataAccess dataAccess = DataAccessFacade.getInstance();
         CheckRecord checkRecord = dataAccess.getCheckRecord();
         checkRecord.addEntry(checkOutEntry);
+    }
+
+    private Book getBook(String ISBN) {
+        Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
+        return book;
     }
 }
