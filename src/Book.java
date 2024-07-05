@@ -6,6 +6,12 @@ public class Book implements Serializable {
     private String ISBN;
     private List<Author> authors;
     private List<BookCopy> copies;
+    public Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies) {
+        this.title = title;
+        this.ISBN = ISBN;
+        this.authors = authors;
+        this.copies = copies;
+    }
 
 
 

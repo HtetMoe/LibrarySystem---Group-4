@@ -49,4 +49,22 @@ public class DataAccessFacade implements DataAccess{
     public Book findBookByISBN(String isbn) {
         return bookMap.get(isbn);
     }
+
+    @Override
+    public boolean addPerson(String id, Person person){
+        if(personMap.containsKey(id)){
+            return false;
+        }
+        personMap.put(id, person);
+        return true;
+    }
+
+    @Override
+    public boolean addBook(String id, Book book){
+        if(bookMap.containsKey(id)){
+            return false;
+        }
+        bookMap.put(id, book);
+        return true;
+    }
 }
