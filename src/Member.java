@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Member extends Role {
+
     private CheckOutEntry checkOutEntry;
 
     //1. check book is available
@@ -25,7 +26,6 @@ public class Member extends Role {
         checkoutBook(book);
     }
 
-
     /*
         - CheckoutEntry is association class between Member and book copy
      */
@@ -41,7 +41,7 @@ public class Member extends Role {
             return;
         }
 
-        CheckOutEntry checkOutEntry = new CheckOutEntry(bookCopy, this, LocalDate.now(), LocalDate.now().plusDays(duration));
+        CheckOutEntry checkOutEntry = CheckOutEntry.createNewCheckoutEntry(bookCopy, this, LocalDate.now(), LocalDate.now().plusDays(duration));
 
         //make association with CheckoutEntry and BookCopy
         this.checkOutEntry = checkOutEntry;

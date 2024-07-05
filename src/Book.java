@@ -7,7 +7,7 @@ public class Book implements Serializable {
     private String ISBN;
     private List<Author> authors;
     private List<BookCopy> copies;
-    private int borrowedDuration;
+    private final int borrowedDuration;
 
     private Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int borrowedDuration) {
         this.title = title;

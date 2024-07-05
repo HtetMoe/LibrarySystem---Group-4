@@ -10,9 +10,8 @@
       <change beforePath="$PROJECT_DIR$/src/Administrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Administrator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Author.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BookCopy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BookCopy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccessFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccessFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CheckOutEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CheckOutEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Member.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +93,10 @@
       <workItem from="1720025284994" duration="1047000" />
       <workItem from="1720120603163" duration="22520000" />
       <workItem from="1720186068631" duration="118000" />
-      <workItem from="1720186457844" duration="2171000" />
+      <workItem from="1720186457844" duration="9680000" />
+      <workItem from="1720205237623" duration="922000" />
+      <workItem from="1720206538955" duration="642000" />
+      <workItem from="1720207529605" duration="257000" />
     </task>
     <servers />
   </component>
