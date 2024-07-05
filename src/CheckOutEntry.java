@@ -8,7 +8,7 @@ public class CheckOutEntry {
     private String datePaid;
     private double fineAmount;
 
-    public CheckOutEntry(BookCopy bookCopy, Member member, LocalDate checkoutDate, LocalDate dueDate) {
+    private CheckOutEntry(BookCopy bookCopy, Member member, LocalDate checkoutDate, LocalDate dueDate) {
         this.bookCopy = bookCopy;
         this.member = member;
         this.checkoutDate = checkoutDate;
@@ -20,4 +20,9 @@ public class CheckOutEntry {
     public boolean isOverdue() {
         return dueDate.isBefore(LocalDate.now());
     }
+
+    public static CheckOutEntry createNewCheckoutEntry(BookCopy bookCopy, Member member, LocalDate checkoutDate, LocalDate dueDate){
+        return new CheckOutEntry(bookCopy, member, checkoutDate, dueDate);
+    }
+
 }
