@@ -12,6 +12,7 @@ public class LibraryManagementUI extends JFrame {
 
     public LibraryManagementUI() {
         dataAccess = new DataAccessFacade(); // Initialize data access facade
+        DataAccessFacade.getInstance().retrieveObject();
 
         setTitle("Library Management System");
         setSize(800, 600);
@@ -32,6 +33,8 @@ public class LibraryManagementUI extends JFrame {
         getContentPane().add(memberPanel, "Member");
 
         showLoginPanel();
+
+
     }
 
     public void showLoginPanel() {

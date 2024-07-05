@@ -21,7 +21,7 @@ public class LoginPanel extends JPanel {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                handleLogin();
-                mainFrame.showMemberPanel();
+                mainFrame.showAdminPanel();
             }
         });
 

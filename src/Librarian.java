@@ -7,7 +7,7 @@ public class Librarian extends Role{
     ask memberId and ISBN for input
      */
 
-    public void checkoutBook(String id, String ISBN){
+    public static void checkoutBook(String id, String ISBN){
         DataAccess dataAccess = DataAccessFacade.getInstance();
         Person person = dataAccess.findPersonById(id);
         Book book = null;
@@ -22,7 +22,7 @@ public class Librarian extends Role{
     /*
 
      */
-    public List<Book> findOverdue(){
+    public static List<Book> findOverdue(){
         List<Book> temp = null;
         DataAccess dataAccess = DataAccessFacade.getInstance();
         List<Book> books = dataAccess.getBooks();
@@ -32,5 +32,10 @@ public class Librarian extends Role{
             }
         }
         return temp;
+    }
+
+    public static void addBookCopy(String ISBN){
+        Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
+        book.addCopy(new BookCopy(book.getCopies().size(),true));
     }
 }

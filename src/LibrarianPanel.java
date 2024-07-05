@@ -69,6 +69,7 @@ public class LibrarianPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 String memberId = memberIdField.getText();
+                Librarian.checkoutBook(memberId,isbn);
                 // Add check out logic here
                 JOptionPane.showMessageDialog(LibrarianPanel.this, "Book checked out successfully!");
             }
@@ -88,21 +89,20 @@ public class LibrarianPanel extends JPanel {
     }
 
     private void showFindOverduePanel() {
-        Librarian librarian = new Librarian(); // Replace with actual librarian name
-        List<CheckOutEntry> checkOutEntries = dataAccess.getCheckRecord().getEntries(); // Ensure this method is available in DataAccessFacade
 
-        List<Book> overdueBooks = librarian.findOverdue();
+        List<Book> overdueBooks = Librarian.findOverdue();
+        if (overdueBooks.isEmpty()) {
+            message.append("No overdue books.");
+        }
+
+        JOptionPane.showMessageDialog(LibrarianPanel.this, message.toString());
 
         StringBuilder message = new StringBuilder("Overdue Books:\n");
         for (Book book : overdueBooks) {
             message.append(book.getTitle()).append(" by ").append(book.getAuthor()).append("\n");
         }
 
-        if (overdueBooks.isEmpty()) {
-            message.append("No overdue books.");
-        }
 
-        JOptionPane.showMessageDialog(LibrarianPanel.this, message.toString());
     }
 
     private void showAddCopyPanel() {
@@ -115,15 +115,8 @@ public class LibrarianPanel extends JPanel {
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
-                List<Book> books = dataAccess.getBooks();
-                for (Book book : books) {
-                    if (book.getIsbn().equals(isbn)) {
-//                        book.addCopy();
-                        JOptionPane.showMessageDialog(LibrarianPanel.this, "Copy added successfully!");
-                        return;
-                    }
-                }
-                JOptionPane.showMessageDialog(LibrarianPanel.this, "Book not found.");
+                Librarian.addBookCopy(isbn);
+                JOptionPane.showMessageDialog(LibrarianPanel.this, "Copy added successfully!");
             }
         });
 
