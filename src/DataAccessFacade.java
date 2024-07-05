@@ -87,7 +87,7 @@ public class DataAccessFacade implements DataAccess{
 //        return retVal;
     }
 
-    private DataAccessFacade(){
+    public DataAccessFacade(){
         personMap = new HashMap<String, Person>();
         bookMap = new HashMap<>();
         initializeData();
@@ -155,5 +155,11 @@ public class DataAccessFacade implements DataAccess{
         List<Book> temp = new ArrayList<>();
         bookMap.forEach((_,v)-> temp.add(v));
         return temp;
+    }
+
+    public List<Person> getAllPeople() {
+       List<Person> persons = new ArrayList<>();
+       personMap.forEach((_,v)-> persons.add(v));
+       return persons;
     }
 }

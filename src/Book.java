@@ -7,7 +7,7 @@ public class Book implements Serializable {
     private String ISBN;
     private List<Author> authors;
     private List<BookCopy> copies;
-    private final int borrowedDuration;
+    private int borrowedDuration;
 
     private Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int borrowedDuration) {
         this.title = title;
@@ -30,8 +30,6 @@ public class Book implements Serializable {
         }
         return new Book(title,ISBN,authorList,bookCopies,borrowDuration);
     }
-
-    public Book(String title, String ISBN) {}
 
     //check out entry
     public void checkout() {

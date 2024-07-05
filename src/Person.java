@@ -9,8 +9,6 @@ public class Person implements Serializable {
     private Address address;
     private Role role;
 
-    public Person() {
-    }
 
     protected Person(String id,String firstName, String lastName, String phone,Address address) {
         this.id = id;
@@ -55,5 +53,9 @@ public class Person implements Serializable {
             return person;
         }
         return null;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }
