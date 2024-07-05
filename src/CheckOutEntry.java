@@ -1,14 +1,23 @@
+import java.time.LocalDate;
+
 public class CheckOutEntry {
-
-    private Book book;
+    private BookCopy bookCopy;
     private Member member;
-
-    private String checkoutDate;
-    private String dueDate;
+    private LocalDate checkoutDate;
+    private LocalDate dueDate;
     private String datePaid;
     private double fineAmount;
 
-    public boolean isOverdue(){
-        return true;
+    public CheckOutEntry(BookCopy bookCopy, Member member, LocalDate checkoutDate, LocalDate dueDate) {
+        this.bookCopy = bookCopy;
+        this.member = member;
+        this.checkoutDate = checkoutDate;
+        this.dueDate = dueDate;
+        //this.datePaid = datePaid;
+        //this.fineAmount = fineAmount;
+    }
+
+    public boolean isOverdue() {
+        return dueDate.isBefore(LocalDate.now());
     }
 }

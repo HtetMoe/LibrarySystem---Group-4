@@ -1,11 +1,14 @@
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataAccessFacade implements DataAccess{
 
     private Map<String, Person> personMap;
     private Map<String, Book> bookMap;
+    private CheckRecord checkRecord;
 
     private static DataAccessFacade instance;
 
@@ -66,5 +69,15 @@ public class DataAccessFacade implements DataAccess{
         }
         bookMap.put(id, book);
         return true;
+    }
+
+    @Override
+    public CheckRecord getCheckRecord() {
+       return this.checkRecord;
+    }
+    public List<Book> getBooks(){
+        List<Book> temp = new ArrayList<>();
+        bookMap.forEach((_,v)-> temp.add(v));
+        return temp;
     }
 }
