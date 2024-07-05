@@ -7,8 +7,8 @@ public class Administrator extends Role{
         - edit member info
      */
 
-    public boolean addNewBook(String ISBN, String title, List<Author> authors, List<BookCopy> copies){
-        return DataAccessFacade.getInstance().addBook(ISBN, new Book(title, ISBN, authors ,copies));
+    public boolean addNewBook(String ISBN, String title, List<Author> authors, List<BookCopy> copies,int maxLengthForRent){
+        return DataAccessFacade.getInstance().addBook(ISBN, new Book(title, ISBN, authors ,copies,maxLengthForRent));
     }
     public boolean addNewMember(String id, Person person, AuthorizationLevel level){
         person.CreateRole(level);
