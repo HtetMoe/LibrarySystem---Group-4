@@ -4,9 +4,9 @@ import java.util.List;
 public class Member extends Role {
     private CheckOutEntry checkOutEntry;
 
-    //check book is available
+    //1. check book is available
     public boolean checkAvailability(String ISBN) {
-        Book book = getBook(ISBN);
+        Book book = getBook(ISBN); // retrieve book
 
         if (book != null) {
             List<BookCopy> copies = book.getCopies();
@@ -19,14 +19,21 @@ public class Member extends Role {
         return false;
     }
 
-    //checkout book
+    //2. checkout book, self-checkout
     public void checkoutBook(String ISBN) {
-        Book book = getBook(ISBN);
+        Book book = getBook(ISBN); // retrieve book
         checkoutBook(book);
     }
 
+
+    /*
+        - CheckoutEntry is association class between Member and book copy
+     */
+
+    //3. checkout by librarian
     public void checkoutBook(Book book) {
-        int duration = book.getMaxLengthForRent();
+        //Most books may be borrowed for 21 days, but some books only for 7 days.
+        int duration = book.getBorrowedDuration();
         BookCopy bookCopy = book.getAvailableBookCopy();
 
         if (bookCopy == null) {
@@ -35,8 +42,12 @@ public class Member extends Role {
         }
 
         CheckOutEntry checkOutEntry = new CheckOutEntry(bookCopy, this, LocalDate.now(), LocalDate.now().plusDays(duration));
+
+        //make association with CheckoutEntry and BookCopy
         this.checkOutEntry = checkOutEntry;
         bookCopy.setCheckOutEntry(checkOutEntry);
+
+        //update status
         bookCopy.setAvailable(false);
 
         //save
@@ -45,6 +56,7 @@ public class Member extends Role {
         checkRecord.addEntry(checkOutEntry);
     }
 
+    //retrieve book
     private Book getBook(String ISBN) {
         Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
         return book;

@@ -6,14 +6,14 @@ public class Book implements Serializable {
     private String ISBN;
     private List<Author> authors;
     private List<BookCopy> copies;
-    private int maxLengthForRent;
+    private int borrowedDuration;
 
     public Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int maxLengthForRent) {
         this.title = title;
         this.ISBN = ISBN;
         this.authors = authors;
         this.copies = copies;
-        this.maxLengthForRent = maxLengthForRent;
+        this.borrowedDuration = maxLengthForRent;
     }
 
     //check out entry
@@ -44,8 +44,8 @@ public class Book implements Serializable {
         //save
     }
 
-    public int getMaxLengthForRent() {
-        return maxLengthForRent;
+    public int getBorrowedDuration() {
+        return borrowedDuration;
     }
 
     public boolean isOverDue() {
