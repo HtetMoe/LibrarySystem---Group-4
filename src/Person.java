@@ -1,4 +1,6 @@
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private String id;
     private String password;
     private String firstName;
@@ -7,7 +9,10 @@ public class Person {
     private Address address;
     private Role role;
 
-    public Person(String id, String firstName, String lastName, String phone, Address address) {
+    public Person() {
+    }
+
+    protected Person(String id,String firstName, String lastName, String phone,Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -15,6 +20,17 @@ public class Person {
         this.address = address;
     }
 
+    public static Person createMember(String id, String firstName, String lastName, String phone, String street, String city, String state, String zip, AuthorizationLevel level){
+        Address address = new Address(street,city,state,zip);
+        Person person = new Person(id,firstName,lastName,phone,address);
+        person.CreateRole(level);
+        return person;
+    }
+    public static Author createAuthor(String id, String firstName, String lastName, String phone, String street, String city, String state, String zip,String credential, String bio){
+        Address address = new Address(street,city,state,zip);
+        Author author = new Author(id,firstName,lastName,phone,address,credential,bio);
+        return author;
+    }
     public String getId() {
         return id;
     }

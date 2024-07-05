@@ -1,15 +1,17 @@
-public class BookCopy {
-    private String copyNumber;
+import java.io.Serializable;
+
+public class BookCopy implements Serializable {
+    private int copyNumber;
     private boolean isAvailable;
     private CheckOutEntry checkOutEntry;
 
-    public BookCopy(String copyNumber, boolean isAvailable) {
+    public BookCopy(int copyNumber, boolean isAvailable) {
         this.copyNumber = copyNumber;
         this.isAvailable = isAvailable;
     }
 
     //getters
-    public String getCopyNumber() {
+    public int getCopyNumber() {
         return copyNumber;
     }
 
