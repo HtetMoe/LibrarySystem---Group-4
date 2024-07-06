@@ -69,9 +69,14 @@ public class LibrarianPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 String memberId = memberIdField.getText();
-                Librarian.checkoutBook(memberId,isbn);
+                boolean checkOutBook = Librarian.checkoutBook(memberId,isbn);
                 // Add check out logic here
-                JOptionPane.showMessageDialog(LibrarianPanel.this, "Book checked out successfully!");
+                if (checkOutBook == true){
+                    JOptionPane.showMessageDialog(LibrarianPanel.this, "Successfully!");
+                }else{
+                    JOptionPane.showMessageDialog(LibrarianPanel.this, "Unsuccessfully!");
+                }
+
             }
         });
 
@@ -93,7 +98,7 @@ public class LibrarianPanel extends JPanel {
         List<Book> overdueBooks = Librarian.findOverdue();
         StringBuilder message = new StringBuilder();
 
-        if (overdueBooks.isEmpty()) {
+        if (overdueBooks == null || overdueBooks.isEmpty()) {
             message.append("No overdue books.");
         } else {
             message.append("Overdue Books:\n");

@@ -7,7 +7,6 @@ import java.util.List;
 public class MemberPanel extends JPanel {
     private DataAccessFacade dataAccess;
     private LibraryManagementUI mainFrame;
-    private Member member;
 
     public MemberPanel(DataAccessFacade dataAccess, LibraryManagementUI mainFrame) {
         this.dataAccess = dataAccess;
@@ -63,8 +62,13 @@ public class MemberPanel extends JPanel {
         checkButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
-                boolean available = member == null ? false : member.checkAvailability(isbn); // Call the method from Member class
-                JOptionPane.showMessageDialog(MemberPanel.this, available ? "Book is available!" : "Book is not available.");
+                boolean available = Member.checkAvailability(isbn); // Call the method from Member class
+                if (available){
+                    JOptionPane.showMessageDialog(MemberPanel.this,"Book is available!" );
+                }else {
+                    JOptionPane.showMessageDialog(MemberPanel.this, "Book is not available.");
+                }
+
             }
         });
 
@@ -133,8 +137,15 @@ public class MemberPanel extends JPanel {
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
-                member.checkoutBook(isbn); // Call the method from Member class
-                JOptionPane.showMessageDialog(MemberPanel.this, "Book checked out successfully!");
+                Person person = DataAccessFacade.getInstance().findPersonById(memberIdField.getText());
+                Member member = (Member) person.getRole();
+               boolean checkoutBook =  member.checkoutBook(isbn); // Call the method from Member class
+                if (checkoutBook){
+                    JOptionPane.showMessageDialog(MemberPanel.this,"Checkout Successful" );
+                }else {
+                    JOptionPane.showMessageDialog(MemberPanel.this,"Checkout UnSuccessful!" );
+                }
+
             }
         });
 

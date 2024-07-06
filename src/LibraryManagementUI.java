@@ -68,13 +68,28 @@ public class LibraryManagementUI extends JFrame {
         DataAccessFacade.getInstance().retrieveObject();
 
         //Mock Data Admin
-//        Person admin = new Person();
-//        admin.setRole(Role.createPersonFactory(AuthorizationLevel.ADMIN));
-//        admin.setId("001");
-//        admin.setPassword("001");
-//        DataAccessFacade.getInstance().addPerson(admin.getId(),admin);
-//        DataAccessFacade.getInstance().saveObject();
-//        System.out.println(DataAccessFacade.getInstance().findPersonById("001"));
+        Person admin = new Person();
+        admin.setRole(Role.createPersonFactory(AuthorizationLevel.ADMIN));
+        admin.setId("001");
+        admin.setPassword("001");
+        DataAccessFacade.getInstance().addPerson(admin.getId(),admin);
+       
+      
+        //Mock Data librarian
+        Person librarian = new Person();
+        librarian.setRole(Role.createPersonFactory(AuthorizationLevel.LIBRARIAN));
+        librarian.setId("100");
+        librarian.setPassword("100");
+        DataAccessFacade.getInstance().addPerson(librarian.getId(),librarian);
+        
+        //Mock Data member
+        Person member = new Person();
+        member.setRole(Role.createPersonFactory(AuthorizationLevel.MEMBER));
+        member.setId("111");
+        member.setPassword("111");
+        DataAccessFacade.getInstance().addPerson(member.getId(),member);
+        DataAccessFacade.getInstance().saveObject();
+        DataAccessFacade.getInstance().print();
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

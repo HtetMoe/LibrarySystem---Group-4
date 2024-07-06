@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class BookCopy implements Serializable {
     private int copyNumber;
     private boolean isAvailable;
-    private CheckOutEntry checkOutEntry;
+    private CheckOutEntry checkOutEntry = new CheckOutEntry();
 
     public BookCopy(int copyNumber, boolean isAvailable) {
         this.copyNumber = copyNumber;
@@ -22,7 +22,10 @@ public class BookCopy implements Serializable {
         this.checkOutEntry = checkOutEntry;
     }
     public boolean isOverdue(){
+        if (this.checkOutEntry == null){
         return checkOutEntry.isOverdue();
+        }
+        return false;
     }
 
     public void setAvailable(boolean available) {
