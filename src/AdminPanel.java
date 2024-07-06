@@ -350,7 +350,7 @@ public class AdminPanel extends JPanel {
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
 
-                return Administrator.addMember(userID, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
+                return Administrator.addMember(userID,password, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
             }
         });
 
@@ -509,6 +509,9 @@ public class AdminPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         Insets increasedPadding = new Insets(15, 15, 15, 15);
 
+        JLabel passwordLabel = new JLabel("Password:");
+        JTextField passwordField = new JTextField(person.getPassword());
+
         JLabel firstNameLabel = new JLabel("First Name:");
         JTextField firstNameField = new JTextField(person.getFirstName());
 
@@ -548,6 +551,7 @@ public class AdminPanel extends JPanel {
                 JOptionPane.showMessageDialog(AdminPanel.this, isEditMemberAlert);
             }
             private boolean editMember(){
+                String password = passwordField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -563,7 +567,7 @@ public class AdminPanel extends JPanel {
                     case ("MEMBER") -> AuthorizationLevel.MEMBER;
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
-                return Administrator.addMember(memberId, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
+                return Administrator.addMember(memberId,password, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
             }
         });
 

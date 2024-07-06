@@ -40,6 +40,6 @@ public class Librarian extends Role implements Serializable {
 
     public static void addBookCopy(String ISBN){
         Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
-        book.addCopy(new BookCopy(book.getCopies().size(),true));
+        book.addCopy(BookCopy.createBookCopy(book.getCopies().size(),true));
     }
 }

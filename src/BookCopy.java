@@ -9,6 +9,9 @@ public class BookCopy implements Serializable {
         this.copyNumber = copyNumber;
         this.isAvailable = isAvailable;
     }
+    public static BookCopy createBookCopy(int copyNumber, boolean isAvailable){
+        return new BookCopy(copyNumber, isAvailable);
+    }
 
     //getters
     public int getCopyNumber() {
