@@ -17,10 +17,7 @@ public class Book implements Serializable {
         this.borrowedDuration = borrowedDuration;
     }
 
-    public static Book createBookWithAuthor(String ISBN,String title,
-                                     String id, String firstName,String lastName, String phone,
-                                     String street,String city,String state, String zip,String credential,String bio,
-                                     int copies, int borrowDuration){
+    public static Book createBookWithAuthor(String ISBN,String title, String id, String firstName, String lastName, String phone, String street, String city, String state, String zip, String credential, String bio, int copies, int borrowDuration){
         List<Author> authorList = new ArrayList<>();
         authorList.add(Person.createAuthor(id,firstName,lastName,phone,street,city,state,zip,credential,bio));
         List<BookCopy> bookCopies = new ArrayList<>();
@@ -57,6 +54,14 @@ public class Book implements Serializable {
         copies.add(copy);
 
         //save
+    }
+
+    public static void addAuthor( Book book, String id, String firstName,String lastName, String phone,
+                                   String street,String city,String state, String zip,String credential,String bio) {
+
+        book.authors.add(Person.createAuthor(id,firstName,lastName,phone,street,city,state,zip,credential,bio));
+
+
     }
 
     public int getBorrowedDuration() {

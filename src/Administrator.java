@@ -9,12 +9,13 @@ public class Administrator extends Role implements Serializable {
      */
 
 
-    public static boolean addNewBook(String ISBN,String title,
+    public static Book addNewBook(String ISBN,String title,
                               String id, String firstName,String lastName, String phone,
                               String street,String city,String state, String zip,String credential, String bio,
                               int copies, int borrowDuration){
         Book book = Book.createBookWithAuthor(ISBN,title,id,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
-        return DataAccessFacade.getInstance().addBook(ISBN,book);
+        DataAccessFacade.getInstance().addBook(ISBN,book);
+        return book;
 
     }
 
@@ -30,8 +31,8 @@ public class Administrator extends Role implements Serializable {
         if(DataAccessFacade.getInstance().findPersonById(id) == null)
             return false;
         return true;
-
     }
+
 
     public Person editMember(String id){
 
@@ -60,10 +61,10 @@ public class Administrator extends Role implements Serializable {
         DataAccessFacade.getInstance().retrieveObject();
         System.out.println(DataAccessFacade.getInstance().findPersonById("001").getRole());
         System.out.println(DataAccessFacade.getInstance().findBookByISBN("111").getBorrowedDuration());
-        boolean bookAdded = administrator.addNewBook("121", "Hate",
-                "001", "dd", "last", "64155",
-                "street", "city", "state", "zip",
-                "credential", "bio", 2, 15);
+//        boolean bookAdded = administrator.addNewBook("121", "Hate",
+//                "001", "dd", "last", "64155",
+//                "street", "city", "state", "zip",
+//                "credential", "bio", 2, 15);
         System.out.println(DataAccessFacade.getInstance().findBookByISBN("121").getBorrowedDuration());
         //DataAccessFacade.getInstance().saveObject();
 

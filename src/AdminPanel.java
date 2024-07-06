@@ -80,6 +80,159 @@ public class AdminPanel extends JPanel {
         add(buttonPanel, BorderLayout.CENTER);
     }
 
+
+    private void showAddAuthor(Book book){
+        JPanel addAuthorPanel = new JPanel(new GridLayout(8, 4));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        Insets columnPadding = new Insets(5, 10, 5, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+
+        JLabel isbnLabel = new JLabel("ISBN:");
+        JTextField isbnField = new JTextField();
+        JLabel titleLabel = new JLabel("Title:");
+        JTextField titleField = new JTextField();
+        JLabel authorIdLabel = new JLabel("Author ID:");
+        JTextField authorIdField = new JTextField();
+        JLabel firstNameLabel = new JLabel("Author First Name:");
+        JTextField firstNameField = new JTextField();
+        JLabel lastNameLabel = new JLabel("Author Last Name:");
+        JTextField lastNameField = new JTextField();
+        JLabel phoneLabel = new JLabel("Author Phone:");
+        JTextField phoneField = new JTextField();
+        JLabel streetLabel = new JLabel("Author Street:");
+        JTextField streetField = new JTextField();
+        JLabel cityLabel = new JLabel("Author City:");
+        JTextField cityField = new JTextField();
+        JLabel stateLabel = new JLabel("Author State:");
+        JTextField stateField = new JTextField();
+        JLabel zipLabel = new JLabel("Author ZIP:");
+        JTextField zipField = new JTextField();
+        JLabel credentialLabel = new JLabel("Author Credential:");
+        JTextField credentialField = new JTextField();
+        JLabel bioLabel = new JLabel("Author Bio:");
+        JTextField bioField = new JTextField();
+
+        JButton addAuthorButton = new JButton("Add Author");
+        addAuthorButton.setPreferredSize(new Dimension(200,50));
+        addAuthorButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent e) {
+                  String isbn = isbnField.getText();
+                  String title = titleField.getText();
+                  String authorId = authorIdField.getText();
+                  String firstName = firstNameField.getText();
+                  String lastName = lastNameField.getText();
+                  String phone = phoneField.getText();
+                  String street = streetField.getText();
+                  String city = cityField.getText();
+                  String state = stateField.getText();
+                  String zip = zipField.getText();
+                  String credential = credentialField.getText();
+                  String bio = bioField.getText();
+              }
+          }
+        );
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        addAuthorPanel.add(isbnLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(titleLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(titleField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(authorIdLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(authorIdField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(firstNameLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(firstNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(lastNameLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(lastNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(phoneLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(phoneField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(streetLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(streetField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(cityLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(cityField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(stateLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(stateField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(zipLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(zipField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(credentialLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(credentialField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addAuthorPanel.add(bioLabel, gbc);
+        gbc.gridx = 1;
+        addAuthorPanel.add(bioField, gbc);
+
+
+//        gbc.gridx = 0;
+//        gbc.gridy++;
+//        gbc.gridwidth = 2;
+//        gbc.insets = new Insets(20, 0, 0, 0);
+////        addBookPanel.add(submitButton, gbc);
+//        gbc.anchor = GridBagConstraints.CENTER;
+//        addBookPanel.add(submitButton, gbc);
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 0, 0, 0);
+//        addBookPanel.add(submitButton, gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        addAuthorPanel.add(addAuthorButton, gbc);
+
+
+        JFrame frame = new JFrame("Add Author");
+        frame.setSize(new Dimension(600, 400));
+        frame.setLocationRelativeTo(null);
+        frame.setContentPane(addAuthorPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+
+
     private void showAddBookPanel() {
         JPanel addBookPanel = new JPanel(new GridLayout(8, 4));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -134,9 +287,33 @@ public class AdminPanel extends JPanel {
                 String zip = zipField.getText();
                 String credential = credentialField.getText();
                 String bio = bioField.getText();
-                int copies = Integer.parseInt(copiesField.getText());
-                int borrowDuration = Integer.parseInt(borrowDurationField.getText());
-                Administrator.addNewBook(isbn,title,authorId,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+                int copies;
+                try {
+                    copies = Integer.parseInt(copiesField.getText());
+                } catch (NumberFormatException e1) {
+                    copiesField.setText("0");
+                    copies = Integer.parseInt(copiesField.getText());
+                }
+
+                int borrowDuration;
+                try{
+                    borrowDuration = Integer.parseInt(borrowDurationField.getText());
+                }catch (NumberFormatException e2){
+                    borrowDurationField.setText("0");
+                    borrowDuration = Integer.parseInt(borrowDurationField.getText());
+                }
+                int response = JOptionPane.showConfirmDialog(AdminPanel.this,
+                        "Do you want to continue adding authors?",
+                        "Confirm",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+
+                Book book = Administrator.addNewBook(isbn,title,authorId,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+
+                if (response == JOptionPane.YES_OPTION) {
+                    showAddAuthor(book);
+                }
+
                 // Book book = Book.createBookWithAuthor(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
 //                dataAccess.addBook(book);
                 JOptionPane.showMessageDialog(AdminPanel.this, "Book added successfully!");
