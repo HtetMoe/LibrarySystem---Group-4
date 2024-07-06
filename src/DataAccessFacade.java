@@ -170,7 +170,7 @@ public class DataAccessFacade implements DataAccess{
 
     public void print(){
         this.bookMap.forEach((k,v)->
-                System.out.println(k+" book map"+v.getAuthor().toString() +" "+v.getCopies()) );
-        this.personMap.forEach((k,v)-> System.out.println(k+" person "+v.getPassword()+" "+ v.getId()));
+                System.out.println(STR."\{k} book map\{v.getAuthor().toString()} \{v.getCopies()}") );
+        this.personMap.forEach((k,v)-> System.out.println(STR."id = \{v.getId()} password = \{v.getPassword()}, role : \{v.getRole().getClass().getSimpleName()}"));
     }
 }
