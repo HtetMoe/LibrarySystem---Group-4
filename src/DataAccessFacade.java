@@ -59,6 +59,12 @@ public class DataAccessFacade implements DataAccess{
             fileInputStreamBookMap = new FileInputStream(bookmap);
             fileInputStreamCheckRecord = new FileInputStream(checkRecord);
             fileInputStreamPersonMap = new FileInputStream(personMap);
+
+            if (fileInputStreamBookMap.available() == 0 || fileInputStreamCheckRecord.available() == 0 || fileInputStreamPersonMap.available() == 0) {
+                throw new IOException("One of the files is empty or corrupted");
+            }
+
+
             ObjectInputStream objectInputStreamBookMap = new ObjectInputStream(fileInputStreamBookMap);
             ObjectInputStream objectInputStreamCheckRecord = new ObjectInputStream(fileInputStreamCheckRecord);
             ObjectInputStream objectInputStreamPersonMap = new ObjectInputStream(fileInputStreamPersonMap);
@@ -66,7 +72,10 @@ public class DataAccessFacade implements DataAccess{
             this.bookMap = (Map<String, Book>) objectInputStreamBookMap.readObject();
             this.checkRecord = (CheckRecord) objectInputStreamCheckRecord.readObject();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            this.personMap = new HashMap<String, Person>();
+            this.bookMap = new HashMap<String, Book>();
+            this.checkRecord = new CheckRecord();
+            //throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -131,9 +140,9 @@ public class DataAccessFacade implements DataAccess{
 
     @Override
     public boolean addPerson(String id, Person person){
-        if(personMap.containsKey(id)){
-            return false;
-        }
+//        if(personMap.containsKey(id)){
+//            return false;
+//        }
         personMap.put(id, person);
         return true;
     }

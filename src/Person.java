@@ -58,4 +58,20 @@ public class Person implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
 }

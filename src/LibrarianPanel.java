@@ -90,17 +90,30 @@ public class LibrarianPanel extends JPanel {
 
     private void showFindOverduePanel() {
 
+//        List<Book> overdueBooks = Librarian.findOverdue();
+//        if (overdueBooks.isEmpty()) {
+//            message.append("No overdue books.");
+//        }
+//
+//        JOptionPane.showMessageDialog(LibrarianPanel.this, message.toString());
+//
+//        StringBuilder message = new StringBuilder("Overdue Books:\n");
+//        for (Book book : overdueBooks) {
+//            message.append(book.getTitle()).append(" by ").append(book.getAuthor()).append("\n");
+//        }
         List<Book> overdueBooks = Librarian.findOverdue();
+        StringBuilder message = new StringBuilder();
+
         if (overdueBooks.isEmpty()) {
             message.append("No overdue books.");
+        } else {
+            message.append("Overdue Books:\n");
+            for (Book book : overdueBooks) {
+                message.append(book.getTitle()).append(" by ").append(book.getAuthor()).append("\n");
+            }
         }
 
         JOptionPane.showMessageDialog(LibrarianPanel.this, message.toString());
-
-        StringBuilder message = new StringBuilder("Overdue Books:\n");
-        for (Book book : overdueBooks) {
-            message.append(book.getTitle()).append(" by ").append(book.getAuthor()).append("\n");
-        }
 
 
     }
