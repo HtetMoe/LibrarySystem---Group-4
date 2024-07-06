@@ -48,7 +48,6 @@ public class Person implements Serializable {
     public static Person login(String id, String password){
         DataAccess dataAccess = DataAccessFacade.getInstance();
         Person person = dataAccess.findPersonById(id);
-
         if (person != null && person.getPassword().equals(password)) {
             return person;
         }

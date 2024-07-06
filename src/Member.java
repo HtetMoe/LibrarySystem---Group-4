@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Member extends Role {
+public class Member extends Role implements Serializable {
     private CheckOutEntry checkOutEntry;
 
     //1. check book is available
@@ -30,14 +31,14 @@ public class Member extends Role {
      */
 
     //3. checkout by librarian
-    public void checkoutBook(Book book) {
+    public boolean checkoutBook(Book book) {
         //Most books may be borrowed for 21 days, but some books only for 7 days.
         int duration = book.getBorrowedDuration();
         BookCopy bookCopy = book.getAvailableBookCopy();
 
         if (bookCopy == null) {
             System.out.println("No book available.");
-            return;
+            return false;
         }
 
         CheckOutEntry checkOutEntry = CheckOutEntry.createNewCheckoutEntry(bookCopy, this, LocalDate.now(), LocalDate.now().plusDays(duration));
@@ -53,6 +54,7 @@ public class Member extends Role {
         DataAccess dataAccess = DataAccessFacade.getInstance();
         CheckRecord checkRecord = dataAccess.getCheckRecord();
         checkRecord.addEntry(checkOutEntry);
+        return true;
     }
 
     //retrieve book

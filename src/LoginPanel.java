@@ -39,6 +39,7 @@ public class LoginPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
+                System.out.println(username+" "+password);
                 Person person = Person.login(username,password);
                 if(person == null){
                     JOptionPane.showMessageDialog(null, "Please enter  id and password correctly",

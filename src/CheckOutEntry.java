@@ -1,12 +1,16 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CheckOutEntry {
+public class CheckOutEntry implements Serializable {
     private BookCopy bookCopy;
     private Member member;
     private LocalDate checkoutDate;
     private LocalDate dueDate;
     private String datePaid;
     private double fineAmount;
+    public CheckOutEntry(){
+
+    }
 
     private CheckOutEntry(BookCopy bookCopy, Member member, LocalDate checkoutDate, LocalDate dueDate) {
         this.bookCopy = bookCopy;
@@ -18,6 +22,7 @@ public class CheckOutEntry {
     }
 
     public boolean isOverdue() {
+        System.out.println(dueDate+"ddd");
         return dueDate.isBefore(LocalDate.now());
     }
 
