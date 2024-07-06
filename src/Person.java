@@ -1,5 +1,7 @@
 import java.io.Serializable;
 
+import static java.lang.StringTemplate.STR;
+
 public class Person implements Serializable {
     private String id;
     private String password;
@@ -102,5 +104,10 @@ public class Person implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return STR."userID : \{getId()}, password : \{getPassword()}, role : \{getRole().getClass().getSimpleName()}";
     }
 }

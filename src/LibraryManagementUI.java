@@ -4,7 +4,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class LibraryManagementUI extends JFrame {
-
     private DataAccessFacade dataAccess;
 
     private JPanel loginPanel;
@@ -67,17 +66,23 @@ public class LibraryManagementUI extends JFrame {
 
     public static void main(String[] args) {
         DataAccessFacade.getInstance().retrieveObject();
-        //To test Data
+
+        //Mock Data Admin
         Person admin = new Person();
         admin.setRole(Role.createPersonFactory(AuthorizationLevel.ADMIN));
         admin.setId("001");
         admin.setPassword("001");
         DataAccessFacade.getInstance().addPerson(admin.getId(),admin);
+       
+      
+        //Mock Data librarian
         Person librarian = new Person();
         librarian.setRole(Role.createPersonFactory(AuthorizationLevel.LIBRARIAN));
         librarian.setId("100");
         librarian.setPassword("100");
         DataAccessFacade.getInstance().addPerson(librarian.getId(),librarian);
+        
+        //Mock Data member
         Person member = new Person();
         member.setRole(Role.createPersonFactory(AuthorizationLevel.MEMBER));
         member.setId("111");
@@ -85,6 +90,7 @@ public class LibraryManagementUI extends JFrame {
         DataAccessFacade.getInstance().addPerson(member.getId(),member);
         DataAccessFacade.getInstance().saveObject();
         DataAccessFacade.getInstance().print();
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new LibraryManagementUI().setVisible(true);
