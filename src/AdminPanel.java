@@ -162,7 +162,7 @@ public class AdminPanel extends JPanel {
                 String bio = bioField.getText();
                 int copies = Integer.parseInt(copiesField.getText());
                 int borrowDuration = Integer.parseInt(borrowDurationField.getText());
-                return Administrator.addNewBook(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
+                return Administrator.addNewBook(isbn, title, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
             }
         });
 
