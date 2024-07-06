@@ -7,7 +7,7 @@ public class Book implements Serializable {
     private String ISBN;
     private List<Author> authors;
     private List<BookCopy> copies;
-    private final int borrowedDuration;
+    private int borrowedDuration;
 
     private Book(String title, String ISBN, List<Author> authors, List<BookCopy> copies, int borrowedDuration) {
         this.title = title;
@@ -68,5 +68,17 @@ public class Book implements Serializable {
             if (bookCopy.isOverdue()) return true;
         }
         return false;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return authors.get(0).toString();
+    }
+
+    public String getIsbn() {
+        return ISBN;
     }
 }

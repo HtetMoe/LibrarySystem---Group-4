@@ -1,10 +1,4 @@
-import javax.print.attribute.standard.NumberOfInterveningJobs;
-import javax.swing.*;
 import java.io.*;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +81,7 @@ public class DataAccessFacade implements DataAccess{
 //        return retVal;
     }
 
-    private DataAccessFacade(){
+    public DataAccessFacade(){
         personMap = new HashMap<String, Person>();
         bookMap = new HashMap<>();
         initializeData();
@@ -155,5 +149,11 @@ public class DataAccessFacade implements DataAccess{
         List<Book> temp = new ArrayList<>();
         bookMap.forEach((_,v)-> temp.add(v));
         return temp;
+    }
+
+    public List<Person> getAllPeople() {
+       List<Person> persons = new ArrayList<>();
+       personMap.forEach((_,v)-> persons.add(v));
+       return persons;
     }
 }
