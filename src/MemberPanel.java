@@ -68,6 +68,11 @@ public class MemberPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 boolean available = Member.checkAvailability(isbn); // Call the method from Member class
+
+                //Close the frame after submit
+                Window parentWindow = SwingUtilities.windowForComponent(checkButton);
+                parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
+
                 if (available){
                     JOptionPane.showMessageDialog(MemberPanel.this,"Book is available!" );
                 }else {
@@ -145,6 +150,10 @@ public class MemberPanel extends JPanel {
                 Person person = DataAccessFacade.getInstance().findPersonById(memberIdField.getText());
                 Member member = (Member) person.getRole();
                boolean checkoutBook =  member.checkoutBook(isbn); // Call the method from Member class
+                //Close the frame after submit
+                Window parentWindow = SwingUtilities.windowForComponent(submitButton);
+                parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
+
                 if (checkoutBook){
                     JOptionPane.showMessageDialog(MemberPanel.this,"Checkout Successful" );
                 }else {

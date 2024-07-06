@@ -75,9 +75,15 @@ public class LibrarianPanel extends JPanel {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                //Close the frame after submit
+                Window parentWindow = SwingUtilities.windowForComponent(submitButton);
+                parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
+
                 String isbn = isbnField.getText();
                 String memberId = memberIdField.getText();
                 boolean checkOutBook = Librarian.checkoutBook(memberId,isbn);
+
                 // Add check out logic here
                 if (checkOutBook == true){
                     JOptionPane.showMessageDialog(LibrarianPanel.this, "Successfully!");
@@ -97,6 +103,7 @@ public class LibrarianPanel extends JPanel {
 
         JFrame frame = new JFrame("Check Out Book");
         frame.setContentPane(checkOutPanel);
+        frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -131,6 +138,10 @@ public class LibrarianPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 Librarian.addBookCopy(isbn);
+                //Close the frame after submit
+                Window parentWindow = SwingUtilities.windowForComponent(submitButton);
+                parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
+
                 JOptionPane.showMessageDialog(LibrarianPanel.this, "Copy added successfully!");
             }
         });
@@ -142,6 +153,7 @@ public class LibrarianPanel extends JPanel {
 
         JFrame frame = new JFrame("Add Copy");
         frame.setContentPane(addCopyPanel);
+        frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

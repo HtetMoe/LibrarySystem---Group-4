@@ -129,7 +129,7 @@ public class AdminPanel extends JPanel {
         zipField.setText("522557");
         credentialField.setText("Java");
         bioField.setText("Read for your brain!");
-        copiesField.setText("10");
+        copiesField.setText("2");
         borrowDurationField.setText("20");
 
         JButton submitButton = new JButton("Submit");
@@ -278,6 +278,9 @@ public class AdminPanel extends JPanel {
         JLabel userID = new JLabel("User ID");
         JTextField userIDField = new JTextField();
 
+        JLabel password = new JLabel("Password");
+        JTextField passwordField = new JTextField();
+
         JLabel firstName = new JLabel("FirstName:");
         JTextField firstNameField = new JTextField();
 
@@ -330,6 +333,7 @@ public class AdminPanel extends JPanel {
                     return false;
                 }
 
+                String password = passwordField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -346,7 +350,7 @@ public class AdminPanel extends JPanel {
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
 
-                return Administrator.addMember(userID, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
+                return Administrator.addMember(userID,password, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
             }
         });
 
@@ -357,6 +361,14 @@ public class AdminPanel extends JPanel {
         gbc.gridx = 1;
         gbc.insets = columnPadding;
         addMemberPanel.add(userIDField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(password, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(passwordField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
@@ -453,17 +465,17 @@ public class AdminPanel extends JPanel {
         submitButton.setPreferredSize(new Dimension(200, 50)); // Set button size
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                //Close the frame after submit
+                Window parentWindow = SwingUtilities.windowForComponent(submitButton);
+                parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
+
                 String memberId = memberIdField.getText();
                 Person person = DataAccessFacade.getInstance().findPersonById(memberId);
 
                 if (person != null) {
                     showEditMemberPanel(person, memberId);
                 } else {
-
-                    //Close the frame after submit
-                    Window parentWindow = SwingUtilities.windowForComponent(submitButton);
-                    parentWindow.dispose(); // This will close the JFrame containing the addBookPanel
-
                     JOptionPane.showMessageDialog(AdminPanel.this, "Member not found.");
                 }
             }
@@ -496,6 +508,9 @@ public class AdminPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         Insets increasedPadding = new Insets(15, 15, 15, 15);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        JTextField passwordField = new JTextField(person.getPassword());
 
         JLabel firstNameLabel = new JLabel("First Name:");
         JTextField firstNameField = new JTextField(person.getFirstName());
@@ -536,6 +551,7 @@ public class AdminPanel extends JPanel {
                 JOptionPane.showMessageDialog(AdminPanel.this, isEditMemberAlert);
             }
             private boolean editMember(){
+                String password = passwordField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -551,7 +567,7 @@ public class AdminPanel extends JPanel {
                     case ("MEMBER") -> AuthorizationLevel.MEMBER;
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
-                return Administrator.addMember(memberId, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
+                return Administrator.addMember(memberId,password, firstName, lastName, phone, street, city, state, zip, authorizationLevel);
             }
         });
 
