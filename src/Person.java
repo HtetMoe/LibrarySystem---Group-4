@@ -74,4 +74,34 @@ public class Person implements Serializable {
     public Address getAddress() {
         return address;
     }
+
+    //will delete below
+
+    public Person(){
+
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

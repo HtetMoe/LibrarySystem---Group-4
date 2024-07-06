@@ -165,4 +165,11 @@ public class DataAccessFacade implements DataAccess{
        personMap.forEach((_,v)-> persons.add(v));
        return persons;
     }
+
+    //delete below
+
+    public void print(){
+        this.bookMap.forEach((k,v)-> System.out.println(k+" "+v));
+        this.personMap.forEach((k,v)-> System.out.println(k+" "+v));
+    }
 }
