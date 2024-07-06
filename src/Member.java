@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Member extends Role {
-
     private CheckOutEntry checkOutEntry;
 
     //1. check book is available
