@@ -14,7 +14,7 @@ public class LibraryManagementUI extends JFrame {
 
     public LibraryManagementUI() {
         dataAccess = new DataAccessFacade(); // Initialize data access facade
-        //DataAccessFacade.getInstance().retrieveObject();
+        DataAccessFacade.getInstance().retrieveObject();
 
         setTitle("Library Management System");
         setSize(800, 600);
