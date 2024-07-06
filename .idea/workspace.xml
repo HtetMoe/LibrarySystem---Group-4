@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e58f7982-2b6e-4b99-8eb4-9fe8b3318f56" name="Changes" comment="ui implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BOOKMAP.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHECKRECORD.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PERSONMAP.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Administrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Administrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccessFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccessFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LibrarianPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LibrarianPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CheckRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CheckRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LibraryManagementUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LibraryManagementUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +41,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.LibraryManagementUI.executor": "Debug",
+    "Application.LibraryManagementUI.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "develop-nang1",
+    "git-widget-placeholder": "develop-hua",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
