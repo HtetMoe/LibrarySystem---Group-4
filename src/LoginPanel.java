@@ -88,7 +88,7 @@ public class LoginPanel extends JPanel {
         String password = new String(passwordField.getPassword());
 
         //process login
-        Person person = Person.login("001", "001");//username, password
+        Person person = Person.login(username, password);//
         System.out.println(STR."Login -> \{person}");
 
         if (person != null) {

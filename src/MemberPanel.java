@@ -21,6 +21,11 @@ public class MemberPanel extends JPanel {
         JButton checkOutBookButton = new JButton("Check Out Book");
         JButton logoutButton = new JButton("Logout");
 
+        Dimension buttonSize = new Dimension(150, 40);
+        checkAvailabilityButton.setPreferredSize(buttonSize);
+        checkOutBookButton.setPreferredSize(buttonSize);
+        logoutButton.setPreferredSize(buttonSize);
+
         checkAvailabilityButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showCheckAvailabilityPanel();
