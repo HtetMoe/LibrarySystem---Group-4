@@ -14,9 +14,10 @@ public class Librarian extends Role implements Serializable {
             return false;
         }
         Book book = null;
-        if (person.getRole() instanceof Member){
+        Role role = person.getRole();
+        if (role instanceof Member){
              book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
-            Member member = (Member) person.getRole();
+            Member member = (Member) role;
             return member.checkoutBook(book);
         }
         return false;
