@@ -88,20 +88,24 @@ public class LoginPanel extends JPanel {
         String password = new String(passwordField.getPassword());
 
         //process login
-        Person person = Person.login(username, password);
+        Person person = Person.login("001", "001");//username, password
         System.out.println(STR."Login -> \{person}");
 
         if (person != null) {
             int response = JOptionPane.showConfirmDialog(null,
                     STR."Successfully Login. Role : \{person.getRole().getClass().getSimpleName()}",
-                    "Success",
+                    "Login Success",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE);
 
             // Check if OK button was clicked
             if (response == JOptionPane.OK_OPTION) {
-                Role role = person.getRole();
 
+                //clear
+                usernameField.setText("");
+                passwordField.setText("");
+
+                Role role = person.getRole();
                 if (role instanceof Administrator)
                     mainFrame.showAdminPanel();
                 else if (role instanceof Librarian)
