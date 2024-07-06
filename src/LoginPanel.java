@@ -20,8 +20,8 @@ public class LoginPanel extends JPanel {
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                handleLogin();
-                mainFrame.showAdminPanel();
+                handleLogin();
+
             }
         });
 
