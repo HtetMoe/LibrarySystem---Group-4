@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class MemberPanel extends JPanel {
-
     private DataAccessFacade dataAccess;
     private LibraryManagementUI mainFrame;
+    private Member member;
 
     public MemberPanel(DataAccessFacade dataAccess, LibraryManagementUI mainFrame) {
         this.dataAccess = dataAccess;
@@ -49,60 +49,149 @@ public class MemberPanel extends JPanel {
     }
 
     private void showCheckAvailabilityPanel() {
-        JPanel checkAvailabilityPanel = new JPanel(new GridLayout(2, 2));
+        JPanel checkAvailabilityPanel = new JPanel();
+        checkAvailabilityPanel.setLayout(new GridBagLayout());
+        checkAvailabilityPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Add spacing between components
 
         JLabel isbnLabel = new JLabel("ISBN:");
-        JTextField isbnField = new JTextField();
+        JTextField isbnField = new JTextField(15); // Set the width of the text field
 
         JButton checkButton = new JButton("Check");
         checkButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
-                List<Book> books = dataAccess.getBooks();
-                boolean available = books.stream().anyMatch(book -> book.getIsbn().equals(isbn));
+                boolean available = member == null ? false : member.checkAvailability(isbn); // Call the method from Member class
                 JOptionPane.showMessageDialog(MemberPanel.this, available ? "Book is available!" : "Book is not available.");
             }
         });
 
-        checkAvailabilityPanel.add(isbnLabel);
-        checkAvailabilityPanel.add(isbnField);
-        checkAvailabilityPanel.add(new JLabel()); // Empty cell
-        checkAvailabilityPanel.add(checkButton);
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Window window = SwingUtilities.getWindowAncestor(checkAvailabilityPanel);
+                if (window != null) {
+                    window.dispose();
+                }
+            }
+        });
+
+        // Add components to the checkAvailabilityPanel
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        checkAvailabilityPanel.add(isbnLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        checkAvailabilityPanel.add(isbnField, gbc);
+
+        // Add a panel for buttons to center them
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(checkButton);
+        buttonPanel.add(cancelButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        checkAvailabilityPanel.add(buttonPanel, gbc);
 
         JFrame frame = new JFrame("Check Availability");
-        frame.setContentPane(checkAvailabilityPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints frameGbc = new GridBagConstraints();
+        frameGbc.gridx = 0;
+        frameGbc.gridy = 0;
+        frameGbc.insets = new Insets(10, 10, 10, 10);
+        frame.add(checkAvailabilityPanel, frameGbc);
+
         frame.pack();
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true);
     }
 
     private void showCheckOutPanel() {
-        JPanel checkOutPanel = new JPanel(new GridLayout(3, 2));
+        JPanel checkOutPanel = new JPanel();
+        checkOutPanel.setLayout(new GridBagLayout());
+        checkOutPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Add spacing between components
 
         JLabel isbnLabel = new JLabel("ISBN:");
-        JTextField isbnField = new JTextField();
+        JTextField isbnField = new JTextField(15); // Set the width of the text field
+
         JLabel memberIdLabel = new JLabel("Member ID:");
-        JTextField memberIdField = new JTextField();
+        JTextField memberIdField = new JTextField(15); // Set the width of the text field
 
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
-                String memberId = memberIdField.getText();
-                // Add check out logic here
+                member.checkoutBook(isbn); // Call the method from Member class
                 JOptionPane.showMessageDialog(MemberPanel.this, "Book checked out successfully!");
             }
         });
 
-        checkOutPanel.add(isbnLabel);
-        checkOutPanel.add(isbnField);
-        checkOutPanel.add(memberIdLabel);
-        checkOutPanel.add(memberIdField);
-        checkOutPanel.add(new JLabel()); // Empty cell
-        checkOutPanel.add(submitButton);
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Window window = SwingUtilities.getWindowAncestor(checkOutPanel);
+                if (window != null) {
+                    window.dispose();
+                }
+            }
+        });
+
+        // Add components to the checkOutPanel
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        checkOutPanel.add(isbnLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        checkOutPanel.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        checkOutPanel.add(memberIdLabel, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        checkOutPanel.add(memberIdField, gbc);
+
+        // Add a panel for buttons to center them
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(submitButton);
+        buttonPanel.add(cancelButton);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        checkOutPanel.add(buttonPanel, gbc);
 
         JFrame frame = new JFrame("Check Out Book");
-        frame.setContentPane(checkOutPanel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints frameGbc = new GridBagConstraints();
+        frameGbc.gridx = 0;
+        frameGbc.gridy = 0;
+        frameGbc.insets = new Insets(10, 10, 10, 10);
+        frame.add(checkOutPanel, frameGbc);
+
         frame.pack();
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true);
     }
 }
