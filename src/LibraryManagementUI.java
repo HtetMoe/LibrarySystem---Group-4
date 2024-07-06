@@ -14,7 +14,7 @@ public class LibraryManagementUI extends JFrame {
 
     public LibraryManagementUI() {
         dataAccess = new DataAccessFacade(); // Initialize data access facade
-        //DataAccessFacade.getInstance().retrieveObject();
+        DataAccessFacade.getInstance().retrieveObject();
 
         setTitle("Library Management System");
         setSize(800, 600);
@@ -66,6 +66,16 @@ public class LibraryManagementUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        DataAccessFacade.getInstance().retrieveObject();
+        //To test Data
+        Person admin = new Person();
+        admin.setRole(Role.createPersonFactory(AuthorizationLevel.ADMIN));
+        admin.setId("001");
+        admin.setPassword("001");
+        DataAccessFacade.getInstance().addPerson(admin.getId(),admin);
+        DataAccessFacade.getInstance().saveObject();
+        System.out.println(DataAccessFacade.getInstance().findPersonById("001"));
+        DataAccessFacade.getInstance().print();
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new LibraryManagementUI().setVisible(true);

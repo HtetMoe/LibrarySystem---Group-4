@@ -37,7 +37,24 @@ public class LoginPanel extends JPanel {
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                handleLogin();
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+                Person person = Person.login(username,password);
+                if(person == null){
+                    JOptionPane.showMessageDialog(null, "Please enter  id and password correctly",
+                            "INFOR", JOptionPane.INFORMATION_MESSAGE);
+
+                }else{
+                    Role role = person.getRole();
+                    System.out.println(role);
+                    if (role instanceof Administrator){
+                        mainFrame.showAdminPanel();
+                    }else if (role instanceof Librarian){
+                        mainFrame.showLibrarianPanel();
+                    }else if(role instanceof Member){
+                        mainFrame.showMemberPanel();
+                    }
+                }
             }
         });
 
@@ -81,19 +98,19 @@ public class LoginPanel extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
     }
 
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-
-
-        if (username.equals("admin")) {
-            mainFrame.showAdminPanel();
-        } else if (username.equals("librarian")) {
-            mainFrame.showLibrarianPanel();
-        } else if (username.equals("member")) {
-            mainFrame.showMemberPanel();
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    private void handleLogin() {
+//        String username = usernameField.getText();
+//        String password = new String(passwordField.getPassword());
+//
+//        Person.login(username,password);
+//        if (username.equals("admin")) {
+//            mainFrame.showAdminPanel();
+//        } else if (username.equals("librarian")) {
+//            mainFrame.showLibrarianPanel();
+//        } else if (username.equals("member")) {
+//            mainFrame.showMemberPanel();
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 }

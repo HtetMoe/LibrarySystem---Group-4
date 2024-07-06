@@ -40,7 +40,8 @@ public class AdminPanel extends JPanel {
 
         editMemberButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                showEditMemberPanel(dataAccess.findPersonById("admin"));
+                //showEditMemberPanel(DataAccessFacade.getInstance().findPersonById(), );
+                showAskForMemberIdPanel();
             }
         });
 
@@ -92,8 +93,6 @@ public class AdminPanel extends JPanel {
         JTextField isbnField = new JTextField();
         JLabel titleLabel = new JLabel("Title:");
         JTextField titleField = new JTextField();
-        JLabel authorIdLabel = new JLabel("Author ID:");
-        JTextField authorIdField = new JTextField();
         JLabel firstNameLabel = new JLabel("Author First Name:");
         JTextField firstNameField = new JTextField();
         JLabel lastNameLabel = new JLabel("Author Last Name:");
@@ -123,7 +122,6 @@ public class AdminPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 String title = titleField.getText();
-                String authorId = authorIdField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -135,10 +133,15 @@ public class AdminPanel extends JPanel {
                 String bio = bioField.getText();
                 int copies = Integer.parseInt(copiesField.getText());
                 int borrowDuration = Integer.parseInt(borrowDurationField.getText());
-                Administrator.addNewBook(isbn,title,authorId,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
-                // Book book = Book.createBookWithAuthor(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
-//                dataAccess.addBook(book);
-                JOptionPane.showMessageDialog(AdminPanel.this, "Book added successfully!");
+                boolean addNewBook = Administrator.addNewBook(isbn,title,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+                DataAccessFacade.getInstance().saveObject();
+                if (addNewBook == true){
+                    JOptionPane.showMessageDialog(AdminPanel.this, "Successfully!");
+
+                }else {
+                    JOptionPane.showMessageDialog(AdminPanel.this, "Unsuccessfully!");
+                }
+
             }
         });
 
@@ -156,9 +159,7 @@ public class AdminPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
-        addBookPanel.add(authorIdLabel, gbc);
         gbc.gridx = 1;
-        addBookPanel.add(authorIdField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
@@ -254,6 +255,8 @@ public class AdminPanel extends JPanel {
         Insets columnPadding = new Insets(5, 10, 5, 10);
 
         // Person fields
+        JLabel userID = new JLabel("User ID");
+        JTextField userIDField = new JTextField();
         JLabel firstName = new JLabel("FirstName:");
         JTextField firstNameField = new JTextField();
         JLabel lastName = new JLabel("LastName:");
@@ -277,6 +280,11 @@ public class AdminPanel extends JPanel {
         submitButton.setPreferredSize(new Dimension(200, 50));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String userID = userIDField.getText();
+                if (Administrator.isIdExists(userID)) {
+                    JOptionPane.showMessageDialog(AdminPanel.this, "ID exists, try a new ID");
+                    return;
+                }
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -291,7 +299,7 @@ public class AdminPanel extends JPanel {
                     case("MEMBER")->AuthorizationLevel.MEMBER;
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
-                Administrator.addMember("id",firstName,lastName,phone,street,city,state,zip,authorizationLevel);
+                Administrator.addMember(userID,firstName,lastName,phone,street,city,state,zip,authorizationLevel);
                 //               Address address = new Address(street, city, state, zip);
 //                Person person = new Person();
 //                dataAccess.addPerson(person);
@@ -301,6 +309,14 @@ public class AdminPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(userID, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(userIDField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
         gbc.insets = reducedInsets;
         addMemberPanel.add(firstName, gbc);
         gbc.gridx = 1;
@@ -395,9 +411,9 @@ public class AdminPanel extends JPanel {
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String memberId = memberIdField.getText();
-                Person person = dataAccess.findPersonById(memberId);
+                Person person = DataAccessFacade.getInstance().findPersonById(memberId);
                 if (person != null) {
-                    showEditMemberPanel(person);
+                    showEditMemberPanel(person, memberId);
                 } else {
                     JOptionPane.showMessageDialog(AdminPanel.this, "Member not found.");
                 }
@@ -426,58 +442,71 @@ public class AdminPanel extends JPanel {
         frame.setVisible(true);
     }
 
-    private void showEditMemberPanel(Person person) {
+    private void showEditMemberPanel(Person person, String memberId) {
         JPanel editMemberPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         Insets increasedPadding = new Insets(15, 15, 15, 15);
 
-        JLabel nameLabel = new JLabel("New Name:");
-        JTextField nameField = new JTextField("person.getName()");
+        JLabel firstNameLabel = new JLabel("First Name:");
+        JTextField firstNameField = new JTextField(person.getFirstName());
+        JLabel lastNameLabel = new JLabel("Last Name:");
+        JTextField lastNameField = new JTextField(person.getLastName());
+        JLabel phoneLabel = new JLabel("Phone:");
+        JTextField phoneField = new JTextField(person.getPhone());
         JLabel roleLabel = new JLabel("New Role:");
-        JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"Admin", "Librarian", "Member"});
+        JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"ADMIN", "LIBRARIAN", "MEMBER"});
         roleComboBox.setSelectedItem(person.getRole());
         JLabel streetLabel = new JLabel("New Street:");
-        JTextField streetField = new JTextField("person.getAddress().getStreet()");
+        JTextField streetField = new JTextField(person.getAddress().getStreet());
         JLabel cityLabel = new JLabel("New City:");
-        JTextField cityField = new JTextField("person.getAddress().getCity()");
+        JTextField cityField = new JTextField(person.getAddress().getCity());
         JLabel stateLabel = new JLabel("New State:");
-        JTextField stateField = new JTextField("person.getAddress().getState(");
+        JTextField stateField = new JTextField(person.getAddress().getState());
         JLabel zipLabel = new JLabel("New ZIP:");
-        JTextField zipField = new JTextField("person.getAddress().getZip()");
+        JTextField zipField = new JTextField(person.getAddress().getZip());
 
         JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(200, 50));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                String memberId = memberIdField.getText();
-                String newName = nameField.getText();
-                String newRole = (String) roleComboBox.getSelectedItem();
-                String newStreet = streetField.getText();
-                String newCity = cityField.getText();
-                String newState = stateField.getText();
-                String newZip = zipField.getText();
-
-//                List<Person> people = dataAccess.getAllPeople();
-//                for (Person person : people) {
-//                    if (person.getId().equals(memberId)) {
-//                        person.setFirstName(newName);
-//                        //person.setRole(newRole);
-//                        //person.setAddress(new Address(newStreet, newCity, newState, newZip));
-//                        JOptionPane.showMessageDialog(AdminPanel.this, "Member updated successfully!");
-//                        return;
-//                    }
-//                }
-                JOptionPane.showMessageDialog(AdminPanel.this, "Member not found.");
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String phone = phoneField.getText();
+                String role = (String) roleComboBox.getSelectedItem();
+                String street = streetField.getText();
+                String city = cityField.getText();
+                String state = stateField.getText();
+                String zip = zipField.getText();
+                AuthorizationLevel authorizationLevel = switch (role){
+                    case("ADMIN")-> AuthorizationLevel.ADMIN;
+                    case("LIBRARIAN")->AuthorizationLevel.LIBRARIAN;
+                    case("MEMBER")->AuthorizationLevel.MEMBER;
+                    default -> throw new IllegalStateException("Unexpected value: " + role);
+                };
+                Administrator.addMember(memberId,firstName,lastName,phone,street,city,state,zip,authorizationLevel);
+                JOptionPane.showMessageDialog(AdminPanel.this, "Member edited successfully!");
             }
         });
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = increasedPadding;
-        editMemberPanel.add(nameLabel, gbc);
+        editMemberPanel.add(firstNameLabel, gbc);
         gbc.gridx = 1;
-        editMemberPanel.add(nameField, gbc);
+        editMemberPanel.add(firstNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(lastNameLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(lastNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(phoneLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(phoneField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
