@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class Librarian extends Role{
+public class Librarian extends Role implements Serializable {
 
     /*
     checkout book by Librarian
