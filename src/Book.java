@@ -25,7 +25,7 @@ public class Book implements Serializable {
         authorList.add(Person.createAuthor(firstName,lastName,phone,street,city,state,zip,credential,bio));
         List<BookCopy> bookCopies = new ArrayList<>();
         for (int i = 1; i<=copies;i++){
-            BookCopy bookCopy = new BookCopy(i,true);
+            BookCopy bookCopy = BookCopy.createBookCopy(i,true);
             bookCopies.add(bookCopy);
         }
         return new Book(title,ISBN,authorList,bookCopies,borrowDuration);
