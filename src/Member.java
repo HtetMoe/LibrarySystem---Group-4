@@ -23,6 +23,9 @@ public class Member extends Role implements Serializable {
     //2. checkout book, self-checkout
     public boolean checkoutBook(String ISBN) {
         Book book = getBook(ISBN); // retrieve book
+        if (book == null){
+            return false;
+        }
         return checkoutBook(book);
     }
 
@@ -51,8 +54,7 @@ public class Member extends Role implements Serializable {
         bookCopy.setAvailable(false);
 
         //save
-        DataAccess dataAccess = DataAccessFacade.getInstance();
-        CheckRecord checkRecord = dataAccess.getCheckRecord();
+        CheckRecord checkRecord = DataAccessFacade.getInstance().getCheckRecord();
         checkRecord.addEntry(checkOutEntry);
         return true;
     }

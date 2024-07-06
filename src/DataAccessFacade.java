@@ -16,7 +16,6 @@ public class DataAccessFacade implements DataAccess{
         CHECKRECORD, PERSONMAP, BOOKMAP;
     }
 
-    public static final String OUTPUTDIR = System.getProperty("user.dir") + "\\save";
 
     public  void saveObject(){
         FileOutputStream fileOutputStreamCheckRecord = null;

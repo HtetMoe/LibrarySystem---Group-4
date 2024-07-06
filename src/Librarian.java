@@ -9,14 +9,13 @@ public class Librarian extends Role implements Serializable {
      */
 
     public static boolean checkoutBook(String id, String ISBN){
-        DataAccess dataAccess = DataAccessFacade.getInstance();
-        Person person = dataAccess.findPersonById(id);
+        Person person = DataAccessFacade.getInstance().findPersonById(id);
         if (person == null){
             return false;
         }
         Book book = null;
         if (person.getRole() instanceof Member){
-             book = dataAccess.findBookByISBN(ISBN);
+             book = DataAccessFacade.getInstance().findBookByISBN(ISBN);
             Member member = (Member) person.getRole();
             return member.checkoutBook(book);
         }
@@ -28,8 +27,7 @@ public class Librarian extends Role implements Serializable {
      */
     public static List<Book> findOverdue(){
         List<Book> temp = null;
-        DataAccess dataAccess = DataAccessFacade.getInstance();
-        List<Book> books = dataAccess.getBooks();
+        List<Book> books = DataAccessFacade.getInstance().getBooks();
         for (Book book:books){
             if (book.isOverDue()) {
                 temp.add(book);
