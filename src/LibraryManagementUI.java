@@ -78,6 +78,11 @@ public class LibraryManagementUI extends JFrame {
         librarian.setId("100");
         librarian.setPassword("100");
         DataAccessFacade.getInstance().addPerson(librarian.getId(),librarian);
+        Person member = new Person();
+        member.setRole(Role.createPersonFactory(AuthorizationLevel.MEMBER));
+        member.setId("111");
+        member.setPassword("111");
+        DataAccessFacade.getInstance().addPerson(member.getId(),member);
         DataAccessFacade.getInstance().saveObject();
         DataAccessFacade.getInstance().print();
         SwingUtilities.invokeLater(new Runnable() {

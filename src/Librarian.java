@@ -11,6 +11,9 @@ public class Librarian extends Role implements Serializable {
     public static boolean checkoutBook(String id, String ISBN){
         DataAccess dataAccess = DataAccessFacade.getInstance();
         Person person = dataAccess.findPersonById(id);
+        if (person == null){
+            return false;
+        }
         Book book = null;
         if (person.getRole() instanceof Member){
              book = dataAccess.findBookByISBN(ISBN);

@@ -6,8 +6,8 @@ public class Member extends Role implements Serializable {
     private CheckOutEntry checkOutEntry;
 
     //1. check book is available
-    public boolean checkAvailability(String ISBN) {
-        Book book = getBook(ISBN); // retrieve book
+    public static boolean checkAvailability(String ISBN) {
+        Book book = DataAccessFacade.getInstance().findBookByISBN(ISBN); // retrieve book
 
         if (book != null) {
             List<BookCopy> copies = book.getCopies();
@@ -21,9 +21,9 @@ public class Member extends Role implements Serializable {
     }
 
     //2. checkout book, self-checkout
-    public void checkoutBook(String ISBN) {
+    public boolean checkoutBook(String ISBN) {
         Book book = getBook(ISBN); // retrieve book
-        checkoutBook(book);
+        return checkoutBook(book);
     }
 
     /*
