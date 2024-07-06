@@ -10,10 +10,10 @@ public class Administrator extends Role implements Serializable {
 
 
     public static boolean addNewBook(String ISBN,String title,
-                              String id, String firstName,String lastName, String phone,
+                               String firstName,String lastName, String phone,
                               String street,String city,String state, String zip,String credential, String bio,
                               int copies, int borrowDuration){
-        Book book = Book.createBookWithAuthor(ISBN,title,id,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+        Book book = Book.createBookWithAuthor(ISBN,title,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
         return DataAccessFacade.getInstance().addBook(ISBN,book);
 
     }
@@ -57,14 +57,14 @@ public class Administrator extends Role implements Serializable {
 //        } else {
 //            System.out.println("Failed to add member 1.");
 //        }
-        DataAccessFacade.getInstance().retrieveObject();
-        System.out.println(DataAccessFacade.getInstance().findPersonById("001").getRole());
-        System.out.println(DataAccessFacade.getInstance().findBookByISBN("111").getBorrowedDuration());
-        boolean bookAdded = administrator.addNewBook("121", "Hate",
-                "001", "dd", "last", "64155",
-                "street", "city", "state", "zip",
-                "credential", "bio", 2, 15);
-        System.out.println(DataAccessFacade.getInstance().findBookByISBN("121").getBorrowedDuration());
+//        DataAccessFacade.getInstance().retrieveObject();
+//        System.out.println(DataAccessFacade.getInstance().findPersonById("001").getRole());
+//        System.out.println(DataAccessFacade.getInstance().findBookByISBN("111").getBorrowedDuration());
+//        boolean bookAdded = administrator.addNewBook("121", "Hate",
+//                "001", "dd", "last", "64155",
+//                "street", "city", "state", "zip",
+//                "credential", "bio", 2, 15);
+//        System.out.println(DataAccessFacade.getInstance().findBookByISBN("121").getBorrowedDuration());
         //DataAccessFacade.getInstance().saveObject();
 
     }

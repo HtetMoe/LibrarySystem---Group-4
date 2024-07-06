@@ -93,8 +93,6 @@ public class AdminPanel extends JPanel {
         JTextField isbnField = new JTextField();
         JLabel titleLabel = new JLabel("Title:");
         JTextField titleField = new JTextField();
-        JLabel authorIdLabel = new JLabel("Author ID:");
-        JTextField authorIdField = new JTextField();
         JLabel firstNameLabel = new JLabel("Author First Name:");
         JTextField firstNameField = new JTextField();
         JLabel lastNameLabel = new JLabel("Author Last Name:");
@@ -124,7 +122,6 @@ public class AdminPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
                 String title = titleField.getText();
-                String authorId = authorIdField.getText();
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String phone = phoneField.getText();
@@ -136,10 +133,15 @@ public class AdminPanel extends JPanel {
                 String bio = bioField.getText();
                 int copies = Integer.parseInt(copiesField.getText());
                 int borrowDuration = Integer.parseInt(borrowDurationField.getText());
-                Administrator.addNewBook(isbn,title,authorId,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
-                // Book book = Book.createBookWithAuthor(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
-//                dataAccess.addBook(book);
-                JOptionPane.showMessageDialog(AdminPanel.this, "Book added successfully!");
+                boolean addNewBook = Administrator.addNewBook(isbn,title,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+                DataAccessFacade.getInstance().saveObject();
+                if (addNewBook == true){
+                    JOptionPane.showMessageDialog(AdminPanel.this, "Successfully!");
+
+                }else {
+                    JOptionPane.showMessageDialog(AdminPanel.this, "Unsuccessfully!");
+                }
+
             }
         });
 
@@ -157,9 +159,7 @@ public class AdminPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
-        addBookPanel.add(authorIdLabel, gbc);
         gbc.gridx = 1;
-        addBookPanel.add(authorIdField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;

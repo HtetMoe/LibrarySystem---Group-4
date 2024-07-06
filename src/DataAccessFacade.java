@@ -8,7 +8,7 @@ public class DataAccessFacade implements DataAccess{
 
     private Map<String, Person> personMap;
     private Map<String, Book> bookMap;
-    private CheckRecord checkRecord;
+    private CheckRecord checkRecord = new CheckRecord();
 
     private static DataAccessFacade instance;
 
@@ -169,7 +169,8 @@ public class DataAccessFacade implements DataAccess{
     //delete below
 
     public void print(){
-        this.bookMap.forEach((k,v)-> System.out.println(k+" "+v));
-        this.personMap.forEach((k,v)-> System.out.println(k+" "+v));
+        this.bookMap.forEach((k,v)->
+                System.out.println(k+" book map"+v.getAuthor().toString()));
+        this.personMap.forEach((k,v)-> System.out.println(k+" person "+v.getId()));
     }
 }

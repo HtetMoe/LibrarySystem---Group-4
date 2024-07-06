@@ -24,9 +24,9 @@ public class Person implements Serializable {
         person.CreateRole(level);
         return person;
     }
-    public static Author createAuthor(String id, String firstName, String lastName, String phone, String street, String city, String state, String zip,String credential, String bio){
+    public static Author createAuthor(String firstName, String lastName, String phone, String street, String city, String state, String zip,String credential, String bio){
         Address address = new Address(street,city,state,zip);
-        Author author = new Author(id,firstName,lastName,phone,address,credential,bio);
+        Author author = new Author("Author",firstName,lastName,phone,address,credential,bio);
         return author;
     }
     public String getId() {

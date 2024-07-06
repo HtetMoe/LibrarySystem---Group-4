@@ -18,11 +18,11 @@ public class Book implements Serializable {
     }
 
     public static Book createBookWithAuthor(String ISBN,String title,
-                                     String id, String firstName,String lastName, String phone,
+                                      String firstName,String lastName, String phone,
                                      String street,String city,String state, String zip,String credential,String bio,
                                      int copies, int borrowDuration){
         List<Author> authorList = new ArrayList<>();
-        authorList.add(Person.createAuthor(id,firstName,lastName,phone,street,city,state,zip,credential,bio));
+        authorList.add(Person.createAuthor(firstName,lastName,phone,street,city,state,zip,credential,bio));
         List<BookCopy> bookCopies = new ArrayList<>();
         for (int i = 1; i<=copies;i++){
             BookCopy bookCopy = new BookCopy(i,true);
@@ -74,8 +74,8 @@ public class Book implements Serializable {
         return title;
     }
 
-    public String getAuthor() {
-        return authors.get(0).toString();
+    public List<Author> getAuthor() {
+        return this.authors;
     }
 
     public String getIsbn() {
