@@ -292,7 +292,7 @@ public class AdminPanel extends JPanel {
                     default -> throw new IllegalStateException("Unexpected value: " + role);
                 };
                 Administrator.addMember("id",firstName,lastName,phone,street,city,state,zip,authorizationLevel);
- //               Address address = new Address(street, city, state, zip);
+                //               Address address = new Address(street, city, state, zip);
 //                Person person = new Person();
 //                dataAccess.addPerson(person);
                 JOptionPane.showMessageDialog(AdminPanel.this, "Member added successfully!");
