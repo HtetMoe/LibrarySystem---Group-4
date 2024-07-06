@@ -19,7 +19,7 @@ public class Administrator extends Role implements Serializable {
     }
 
 
-    public static boolean addMember(String id, String firstName,String lastName, String phone,
+    public static boolean addMember(String id,String firstName,String lastName, String phone,
                                 String street,String city,String state, String zip,
                                 AuthorizationLevel level){
         Person person = Person.createMember(id,firstName,lastName,phone,street,city,state,zip,level);
