@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class AdminPanel extends JPanel {
 
@@ -17,6 +19,7 @@ public class AdminPanel extends JPanel {
         JLabel titleLabel = new JLabel("Admin Dashboard");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
         JButton addBookButton = new JButton("Add Book");
         JButton addMemberButton = new JButton("Add Member");
@@ -54,17 +57,37 @@ public class AdminPanel extends JPanel {
             }
         });
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addBookButton);
-        buttonPanel.add(addMemberButton);
-        buttonPanel.add(editMemberButton);
-        buttonPanel.add(logoutButton);
+        Dimension buttonSize = new Dimension(200, 50); // Set preferred size for buttons
+        addBookButton.setPreferredSize(buttonSize);
+        addMemberButton.setPreferredSize(buttonSize);
+        editMemberButton.setPreferredSize(buttonSize);
+        logoutButton.setPreferredSize(buttonSize);
+
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.gridx = 0;
+        gbc.gridy = GridBagConstraints.RELATIVE;
+        gbc.insets = new Insets(10, 0, 10, 0); // Add vertical spacing between buttons
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        buttonPanel.add(addBookButton, gbc);
+        buttonPanel.add(addMemberButton, gbc);
+        buttonPanel.add(editMemberButton, gbc);
+        buttonPanel.add(logoutButton, gbc);
 
         add(buttonPanel, BorderLayout.CENTER);
     }
 
     private void showAddBookPanel() {
-        JPanel addBookPanel = new JPanel(new GridLayout(15, 2));
+        JPanel addBookPanel = new JPanel(new GridLayout(8, 4));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        Insets columnPadding = new Insets(5, 10, 5, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
 
         JLabel isbnLabel = new JLabel("ISBN:");
         JTextField isbnField = new JTextField();
@@ -96,6 +119,7 @@ public class AdminPanel extends JPanel {
         JTextField borrowDurationField = new JTextField();
 
         JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(200, 50));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String isbn = isbnField.getText();
@@ -119,45 +143,116 @@ public class AdminPanel extends JPanel {
             }
         });
 
-        addBookPanel.add(isbnLabel);
-        addBookPanel.add(isbnField);
-        addBookPanel.add(titleLabel);
-        addBookPanel.add(titleField);
-        addBookPanel.add(authorIdLabel);
-        addBookPanel.add(authorIdField);
-        addBookPanel.add(firstNameLabel);
-        addBookPanel.add(firstNameField);
-        addBookPanel.add(lastNameLabel);
-        addBookPanel.add(lastNameField);
-        addBookPanel.add(phoneLabel);
-        addBookPanel.add(phoneField);
-        addBookPanel.add(streetLabel);
-        addBookPanel.add(streetField);
-        addBookPanel.add(cityLabel);
-        addBookPanel.add(cityField);
-        addBookPanel.add(stateLabel);
-        addBookPanel.add(stateField);
-        addBookPanel.add(zipLabel);
-        addBookPanel.add(zipField);
-        addBookPanel.add(credentialLabel);
-        addBookPanel.add(credentialField);
-        addBookPanel.add(bioLabel);
-        addBookPanel.add(bioField);
-        addBookPanel.add(copiesLabel);
-        addBookPanel.add(copiesField);
-        addBookPanel.add(borrowDurationLabel);
-        addBookPanel.add(borrowDurationField);
-        addBookPanel.add(new JLabel()); // Empty cell
-        addBookPanel.add(submitButton);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        addBookPanel.add(isbnLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(isbnField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(titleLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(titleField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(authorIdLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(authorIdField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(firstNameLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(firstNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(lastNameLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(lastNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(phoneLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(phoneField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(streetLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(streetField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(cityLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(cityField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(stateLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(stateField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(zipLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(zipField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(credentialLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(credentialField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(bioLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(bioField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(copiesLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(copiesField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        addBookPanel.add(borrowDurationLabel, gbc);
+        gbc.gridx = 1;
+        addBookPanel.add(borrowDurationField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 0, 0, 0);
+//        addBookPanel.add(submitButton, gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        addBookPanel.add(submitButton, gbc);
+
 
         JFrame frame = new JFrame("Add Book");
+        frame.setSize(new Dimension(600, 400));
+        frame.setLocationRelativeTo(null);
         frame.setContentPane(addBookPanel);
         frame.pack();
         frame.setVisible(true);
     }
 
     private void showAddMemberPanel() {
-        JPanel addMemberPanel = new JPanel(new GridLayout(9, 2));
+        JPanel addMemberPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Reduced padding around components
+        Insets reducedInsets = new Insets(5, 5, 5, 5);
+        // Padding between columns
+        Insets columnPadding = new Insets(5, 10, 5, 10);
 
         JLabel roleLabel = new JLabel("Role:");
         JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"ADMIN", "LIBRARIAN", "MEMBER"});
@@ -184,6 +279,7 @@ public class AdminPanel extends JPanel {
         JTextField zipField = new JTextField(10);
 
         JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(200, 50));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String id = userIDField.getText();
@@ -213,65 +309,137 @@ public class AdminPanel extends JPanel {
             }
         });
 
-        addMemberPanel.add(userID);
-        addMemberPanel.add(userIDField);
-        addMemberPanel.add(firstNameLabel);
-        addMemberPanel.add(firstNameField);
-        addMemberPanel.add(lastNameLabel);
-        addMemberPanel.add(lastNameField);
-        addMemberPanel.add(phoneLabel);
-        addMemberPanel.add(phoneField);
-        addMemberPanel.add(roleLabel);
-        addMemberPanel.add(roleComboBox);
-        addMemberPanel.add(streetLabel);
-        addMemberPanel.add(streetField);
-        addMemberPanel.add(cityLabel);
-        addMemberPanel.add(cityField);
-        addMemberPanel.add(stateLabel);
-        addMemberPanel.add(stateField);
-        addMemberPanel.add(zipLabel);
-        addMemberPanel.add(zipField);
-        addMemberPanel.add(new JLabel()); // Empty cell
-        addMemberPanel.add(submitButton);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(firstName, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(firstNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(lastName, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(lastNameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(phone, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(phoneField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(roleLabel, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(roleComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(streetLabel, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(streetField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(cityLabel, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(cityField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(stateLabel, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(stateField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.insets = reducedInsets;
+        addMemberPanel.add(zipLabel, gbc);
+        gbc.gridx = 1;
+        gbc.insets = columnPadding;
+        addMemberPanel.add(zipField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 0, 0, 0); // Add some top padding for the submit button
+        gbc.anchor = GridBagConstraints.CENTER;
+        addMemberPanel.add(submitButton, gbc);
 
         JFrame frame = new JFrame("Add Member");
         frame.setContentPane(addMemberPanel);
+        frame.setSize(new Dimension(600, 400));
+        frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
     }
 
     private void showAskForMemberIdPanel() {
-        JPanel askForMemberIdPanel = new JPanel(new GridLayout(2, 2));
+        JPanel askForMemberIdPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        JLabel memberIdLabel = new JLabel("Member ID:");
-        JTextField memberIdField = new JTextField();
+        // Padding around components
+        Insets padding = new Insets(10, 10, 10, 10);
+
+        JLabel memberIdLabel = new JLabel("ID Number:");
+        JTextField memberIdField = new JTextField(20);
 
         JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(200, 50)); // Set button size
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String memberId = memberIdField.getText();
                 Person person = DataAccessFacade.getInstance().findPersonById(memberId);
-                if (person != null) {
-                    showEditMemberPanel(person, memberId);
+                    showEditMemberPanel(person);
                 } else {
                     JOptionPane.showMessageDialog(AdminPanel.this, "Member not found.");
                 }
             }
         });
 
-        askForMemberIdPanel.add(memberIdLabel);
-        askForMemberIdPanel.add(memberIdField);
-        askForMemberIdPanel.add(new JLabel()); // Empty cell
-        askForMemberIdPanel.add(submitButton);
+        // Adding components to the panel with GridBagConstraints
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = padding;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        askForMemberIdPanel.add(memberIdLabel, gbc);
+
+        gbc.gridy++;
+        askForMemberIdPanel.add(memberIdField, gbc);
+
+        gbc.gridy++;
+        gbc.insets = new Insets(20, 10, 10, 10); // Add some top padding for the submit button
+        askForMemberIdPanel.add(submitButton, gbc);
 
         JFrame frame = new JFrame("Enter Member ID");
         frame.setContentPane(askForMemberIdPanel);
-        frame.pack();
+        frame.setSize(new Dimension(400, 200)); // Set the frame size
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true);
     }
 
-    private void showEditMemberPanel(Person person, String memberId) {
-        JPanel editMemberPanel = new JPanel(new GridLayout(9, 2));
+    private void showEditMemberPanel(Person person) {
+        JPanel editMemberPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        Insets increasedPadding = new Insets(15, 15, 15, 15);
 
         JLabel firstNameLabel = new JLabel("New Name:");
         JTextField firstNameField = new JTextField(person.getFirstName());
@@ -292,6 +460,7 @@ public class AdminPanel extends JPanel {
         JTextField zipField = new JTextField(person.getAddress().getZip());
 
         JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(200, 50));
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     String firstName = firstNameField.getText();
@@ -314,30 +483,54 @@ public class AdminPanel extends JPanel {
             }
         });
 
-//        editMemberPanel.add(memberIdLabel);
-//        editMemberPanel.add(memberIdField);
-        editMemberPanel.add(firstNameLabel);
-        editMemberPanel.add(firstNameField);
-        editMemberPanel.add(lastNameLabel);
-        editMemberPanel.add(lastNameField);
-        editMemberPanel.add(phoneLabel);
-        editMemberPanel.add(phoneField);
-        editMemberPanel.add(roleLabel);
-        editMemberPanel.add(roleComboBox);
-        editMemberPanel.add(streetLabel);
-        editMemberPanel.add(streetField);
-        editMemberPanel.add(cityLabel);
-        editMemberPanel.add(cityField);
-        editMemberPanel.add(stateLabel);
-        editMemberPanel.add(stateField);
-        editMemberPanel.add(zipLabel);
-        editMemberPanel.add(zipField);
-        editMemberPanel.add(new JLabel()); // Empty cell
-        editMemberPanel.add(submitButton);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = increasedPadding;
+        editMemberPanel.add(nameLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(nameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(roleLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(roleComboBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(streetLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(streetField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(cityLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(cityField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(stateLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(stateField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        editMemberPanel.add(zipLabel, gbc);
+        gbc.gridx = 1;
+        editMemberPanel.add(zipField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 15, 15, 15); // Add some top padding for the submit button
+        gbc.anchor = GridBagConstraints.CENTER;
+        editMemberPanel.add(submitButton, gbc);
 
         JFrame frame = new JFrame("Edit Member");
         frame.setContentPane(editMemberPanel);
-        frame.pack();
+        frame.setSize(new Dimension(800, 600)); // Set a larger frame size
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
         frame.setVisible(true);
     }
 }
