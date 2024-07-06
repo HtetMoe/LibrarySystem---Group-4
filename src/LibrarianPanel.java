@@ -15,6 +15,7 @@ public class LibrarianPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("Librarian Dashboard");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(titleLabel, BorderLayout.NORTH);
 
@@ -22,6 +23,12 @@ public class LibrarianPanel extends JPanel {
         JButton findOverdueButton = new JButton("Find Overdue Books");
         JButton addCopyButton = new JButton("Add Copy");
         JButton logoutButton = new JButton("Logout");
+
+        Dimension buttonSize = new Dimension(150, 50);
+        checkOutBookButton.setPreferredSize(buttonSize);
+        findOverdueButton.setPreferredSize(buttonSize);
+        addCopyButton.setPreferredSize(buttonSize);
+        logoutButton.setPreferredSize(buttonSize);
 
         checkOutBookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -48,6 +55,7 @@ public class LibrarianPanel extends JPanel {
         });
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));  // Center align, 20px horizontal gap, 10px vertical gap
         buttonPanel.add(checkOutBookButton);
         buttonPanel.add(findOverdueButton);
         buttonPanel.add(addCopyButton);
@@ -97,6 +105,7 @@ public class LibrarianPanel extends JPanel {
         frame.setContentPane(checkOutPanel);
         frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -146,6 +155,7 @@ public class LibrarianPanel extends JPanel {
         frame.setContentPane(addCopyPanel);
         frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
