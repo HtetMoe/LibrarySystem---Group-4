@@ -34,34 +34,19 @@ public class LoginPanel extends JPanel {
         JLabel passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField(25); // Adjusted width to match the username field
 
-        JButton loginButton = new JButton("Login");
+        JButton loginButton = new JButton("LOGIN");
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
-                Person person = Person.login(username,password);
-                if(person == null){
-                    JOptionPane.showMessageDialog(null, "Please enter  id and password correctly",
-                            "INFOR", JOptionPane.INFORMATION_MESSAGE);
-
-                }else{
-                    Role role = person.getRole();
-                    System.out.println(role);
-                    if (role instanceof Administrator){
-                        mainFrame.showAdminPanel();
-                    }else if (role instanceof Librarian){
-                        mainFrame.showLibrarianPanel();
-                    }else if(role instanceof Member){
-                        mainFrame.showMemberPanel();
-                    }
-                }
+                handleLogin(); // handle login function
             }
         });
 
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("CLEAR");
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Add action for cancel button if needed
+                //clear
+                usernameField.setText("");
+                passwordField.setText("");
             }
         });
 
@@ -94,23 +79,38 @@ public class LoginPanel extends JPanel {
         buttonPanel.add(loginButton);
         buttonPanel.add(cancelButton);
         centerPanel.add(buttonPanel, gbc);
-
         add(centerPanel, BorderLayout.CENTER);
     }
 
-//    private void handleLogin() {
-//        String username = usernameField.getText();
-//        String password = new String(passwordField.getPassword());
-//
-//        Person.login(username,password);
-//        if (username.equals("admin")) {
-//            mainFrame.showAdminPanel();
-//        } else if (username.equals("librarian")) {
-//            mainFrame.showLibrarianPanel();
-//        } else if (username.equals("member")) {
-//            mainFrame.showMemberPanel();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+    private void handleLogin() {
+        //user input
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+
+        //process login
+        Person person = Person.login(username, password);
+        System.out.println(STR."Login -> \{person}");
+
+        if (person != null) {
+            int response = JOptionPane.showConfirmDialog(null,
+                    STR."Successfully Login. Role : \{person.getRole().getClass().getSimpleName()}",
+                    "Success",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // Check if OK button was clicked
+            if (response == JOptionPane.OK_OPTION) {
+                Role role = person.getRole();
+
+                if (role instanceof Administrator)
+                    mainFrame.showAdminPanel();
+                else if (role instanceof Librarian)
+                    mainFrame.showLibrarianPanel();
+                else if (role instanceof Member)
+                    mainFrame.showMemberPanel();
+            }
+        } else // show alert
+            JOptionPane.showMessageDialog(null, "Incorrect Username or Password.",
+                    "Invalid Credentials!", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
