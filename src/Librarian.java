@@ -8,16 +8,16 @@ public class Librarian extends Role implements Serializable {
     ask memberId and ISBN for input
      */
 
-    public static void checkoutBook(String id, String ISBN){
+    public static boolean checkoutBook(String id, String ISBN){
         DataAccess dataAccess = DataAccessFacade.getInstance();
         Person person = dataAccess.findPersonById(id);
         Book book = null;
         if (person.getRole() instanceof Member){
              book = dataAccess.findBookByISBN(ISBN);
             Member member = (Member) person.getRole();
-            member.checkoutBook(book);
+            return member.checkoutBook(book);
         }
-
+        return false;
     }
 
     /*

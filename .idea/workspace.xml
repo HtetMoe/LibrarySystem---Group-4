@@ -4,8 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e58f7982-2b6e-4b99-8eb4-9fe8b3318f56" name="Changes" comment="Admin add new Book">
+    <list default="true" id="e58f7982-2b6e-4b99-8eb4-9fe8b3318f56" name="Changes" comment="Administration is done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BookCopy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BookCopy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CheckOutEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CheckOutEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CheckRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CheckRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccessFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccessFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Librarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Librarian.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LibrarianPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LibrarianPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LibraryManagementUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LibraryManagementUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720294276531</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Administration is done">
+      <option name="closed" value="true" />
+      <created>1720295255062</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720295255062</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,7 +144,8 @@
     <MESSAGE value="ui implementation" />
     <MESSAGE value="Login completed and go to admin" />
     <MESSAGE value="Admin add new Book" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin add new Book" />
+    <MESSAGE value="Administration is done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Administration is done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

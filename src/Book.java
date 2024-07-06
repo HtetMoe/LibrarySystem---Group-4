@@ -65,8 +65,10 @@ public class Book implements Serializable {
 
     public boolean isOverDue() {
         for (BookCopy bookCopy : copies) {
-            if (bookCopy.isOverdue()) return true;
-        }
+            if (bookCopy.isOverdue()) {return true;
+            }
+            }
+
         return false;
     }
 
