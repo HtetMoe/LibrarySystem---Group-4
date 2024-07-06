@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class CheckRecord {
+public class CheckRecord implements Serializable {
     private List<CheckOutEntry> entries;
 
     public List<CheckOutEntry> getEntries() {

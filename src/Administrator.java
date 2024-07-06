@@ -25,6 +25,14 @@ public class Administrator extends Role implements Serializable {
         Person person = Person.createMember(id,firstName,lastName,phone,street,city,state,zip,level);
         return DataAccessFacade.getInstance().addPerson(id, person);
     }
+
+    public static boolean isIdExists(String id){
+        if(DataAccessFacade.getInstance().findPersonById(id) == null)
+            return false;
+        return true;
+
+    }
+
     public Person editMember(String id){
 
         return DataAccessFacade.getInstance().findPersonById(id);
