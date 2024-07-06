@@ -111,8 +111,8 @@ public class AdminPanel extends JPanel {
                 String bio = bioField.getText();
                 int copies = Integer.parseInt(copiesField.getText());
                 int borrowDuration = Integer.parseInt(borrowDurationField.getText());
-
-                Book book = Book.createBookWithAuthor(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
+                Administrator.addNewBook(isbn,title,authorId,firstName,lastName,phone,street,city,state,zip,credential,bio,copies,borrowDuration);
+                // Book book = Book.createBookWithAuthor(isbn, title, authorId, firstName, lastName, phone, street, city, state, zip, credential, bio, copies, borrowDuration);
 //                dataAccess.addBook(book);
                 JOptionPane.showMessageDialog(AdminPanel.this, "Book added successfully!");
             }
@@ -159,10 +159,14 @@ public class AdminPanel extends JPanel {
         JPanel addMemberPanel = new JPanel(new GridLayout(9, 2));
 
         // Person fields
-        JLabel nameLabel = new JLabel("Name:");
-        JTextField nameField = new JTextField();
+        JLabel firstName = new JLabel("FirstName:");
+        JTextField firstNameField = new JTextField();
+        JLabel lastName = new JLabel("LastName:");
+        JTextField lastNameField = new JTextField();
+        JLabel phone = new JLabel("Phone:");
+        JTextField phoneField = new JTextField();
         JLabel roleLabel = new JLabel("Role:");
-        JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"Admin", "Librarian", "Member"});
+        JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"ADMIN", "LIBRARIAN", "MEMBER"});
 
         // Address fields
         JLabel streetLabel = new JLabel("Street:");
@@ -177,23 +181,32 @@ public class AdminPanel extends JPanel {
         JButton submitButton = new JButton("Submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String phone = phoneField.getText();
                 String role = (String) roleComboBox.getSelectedItem();
                 String street = streetField.getText();
                 String city = cityField.getText();
                 String state = stateField.getText();
                 String zip = zipField.getText();
-
-                Address address = new Address(street, city, state, zip);
+                AuthorizationLevel authorizationLevel = switch (role){
+                    case("ADMIN")-> AuthorizationLevel.ADMIN;
+                    case("LIBRARIAN")->AuthorizationLevel.LIBRARIAN;
+                    case("MEMBER")->AuthorizationLevel.MEMBER;
+                    default -> throw new IllegalStateException("Unexpected value: " + role);
+                };
+                Administrator.addMember("id",firstName,lastName,phone,street,city,state,zip,authorizationLevel);
+ //               Address address = new Address(street, city, state, zip);
 //                Person person = new Person();
 //                dataAccess.addPerson(person);
                 JOptionPane.showMessageDialog(AdminPanel.this, "Member added successfully!");
             }
         });
 
-        addMemberPanel.add(nameLabel);
-        addMemberPanel.add(nameField);
+        addMemberPanel.add(firstNameField);
+        addMemberPanel.add(lastNameField);
         addMemberPanel.add(roleLabel);
+        addMemberPanel.add(phoneField);
         addMemberPanel.add(roleComboBox);
         addMemberPanel.add(streetLabel);
         addMemberPanel.add(streetField);
