@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class LibraryManagementUI extends JFrame {
 
@@ -34,7 +36,13 @@ public class LibraryManagementUI extends JFrame {
 
         showLoginPanel();
 
-
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DataAccessFacade.getInstance().saveObject();
+                System.exit(0);
+            }
+        });
     }
 
     public void showLoginPanel() {
